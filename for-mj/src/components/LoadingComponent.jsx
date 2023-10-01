@@ -6,10 +6,13 @@ import LinearProgressWithLabel from "./LinearProgressWithLabel";
 const LoadingComponent = ({progress}) => {
   return (
     <>
-      <Box sx={{ width: "100%" }}>
+    <div style={{textAlign:'center'}}>
+      <h3>AI 분석중...</h3>
+      <Box sx={{ width: "400px" }}>
         <LinearProgressWithLabel value={progress} />
       </Box>
-      <img src={imgsrc} alt="img" />
+      <img src={imgsrc} alt="img" style={{width:'400px'}}/>
+      </div>
     </>
   );
 };

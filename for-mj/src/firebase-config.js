@@ -5,14 +5,13 @@ import { getFirestore } from "firebase/firestore";
 // See: https://support.google.com/firebase/answer/7015592
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASEKEY,
-  authDomain: "for-mj-bc3bb.firebaseapp.com",
-  projectId: "for-mj-bc3bb",
-  storageBucket: "for-mj-bc3bb.appspot.com",
-  messagingSenderId: "784291556788",
-  appId: "1:784291556788:web:019785f64dd4c4213856e1",
-  measurementId: "G-JVHBKDYW13"
+  authDomain: "for-mj-39b53.firebaseapp.com",
+  projectId: "for-mj-39b53",
+  storageBucket: "for-mj-39b53.appspot.com",
+  messagingSenderId: "114908257627",
+  appId: "1:114908257627:web:d4b38d34883e5b2c850e7e",
+  measurementId: "G-BN06J00X7R"
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

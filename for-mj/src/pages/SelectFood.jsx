@@ -3,10 +3,11 @@ import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { motion } from "framer-motion";
 import LoadingComponent from "../components/LoadingComponent";
+import FoodItem from "../components/FoodItem";
 
 const SelectFood = () => {
   //////////////////////////////////////////////////변수//////////////////////////////////////////////////
-  
+
   ////////////////////////////////////////////////// About 파이어스토어
 
   // 컬렉션 참조
@@ -16,6 +17,8 @@ const SelectFood = () => {
   // 카테고리 상태
   const [category1, setCategory1] = useState("");
   const [category2, setCategory2] = useState("");
+  // 데이터 리스트 보여주기 여부
+  const [showDataList, setShowDataList] = useState(false);
 
   ////////////////////////////////////////////////// About 인풋폼
 
@@ -23,6 +26,9 @@ const SelectFood = () => {
   const [formData, setFormData] = useState({
     category1: "",
     category2: "",
+    name: "",
+    place: "",
+    hash: "",
   });
 
   ////////////////////////////////////////////////// About 프로그래스 바
@@ -31,10 +37,6 @@ const SelectFood = () => {
   const [progress, setProgress] = React.useState(0);
   // 로딩 컴포넌트 렌더링 여부
   const [loadingShow, setLoadingShow] = useState(false);
-
-
-
-
 
   //////////////////////////////////////////////////함수//////////////////////////////////////////////////
 
@@ -47,6 +49,9 @@ const SelectFood = () => {
       const docRef = await addDoc(collection(db, "FoodList"), {
         category1: formData.category1,
         category2: formData.category2,
+        name: formData.name,
+        place: formData.place,
+        hash: formData.hash,
         timestamp: new Date(),
       });
       // 작업 성공 시 문서의 id 즉, 문서명을 콘솔 출력한다
@@ -56,138 +61,57 @@ const SelectFood = () => {
     }
   };
   //데이터 읽기
-  const readData = useCallback(
-    async (category1, category2) => {
-      const newData = []; // 옮겨닮을 배열
-      let filterData = null;
+  const readData = useCallback(async (category1, category2) => {
+    try {
+      const newData = [];
+      let filterData = FoodListRef; // 기본적으로 모든 데이터를 가져옵니다.
 
-      switch (category1) {
-        case "한식":
-          switch (category2) {
-            case "국물":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "한식"),
-                where("category2", "==", "국물")
-              );
-              break;
-            case "볶음":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "한식"),
-                where("category2", "==", "볶음")
-              );
-              break;
-            case "튀김":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "한식"),
-                where("category2", "==", "튀김")
-              );
-              break;
-            default:
-              filterData = query(FoodListRef, where("category1", "==", "한식"));
-          }
-          break;
-        case "중식":
-          switch (category2) {
-            case "국물":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "중식"),
-                where("category2", "==", "국물")
-              );
-              break;
-            case "볶음":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "중식"),
-                where("category2", "==", "볶음")
-              );
-              break;
-            case "튀김":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "중식"),
-                where("category2", "==", "튀김")
-              );
-              break;
-            default:
-              filterData = query(FoodListRef, where("category1", "==", "중식"));
-          }
-          break;
-        case "일식":
-          switch (category2) {
-            case "국물":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "일식"),
-                where("category2", "==", "국물")
-              );
-              break;
-            case "볶음":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "일식"),
-                where("category2", "==", "볶음")
-              );
-              break;
-            case "튀김":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "일식"),
-                where("category2", "==", "튀김")
-              );
-              break;
-            default:
-              filterData = query(FoodListRef, where("category1", "==", "일식"));
-          }
-          break;
-        case "양식":
-          switch (category2) {
-            case "국물":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "양식"),
-                where("category2", "==", "국물")
-              );
-              break;
-            case "볶음":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "양식"),
-                where("category2", "==", "볶음")
-              );
-              break;
-            case "튀김":
-              filterData = query(
-                FoodListRef,
-                where("category1", "==", "양식"),
-                where("category2", "==", "튀김")
-              );
-              break;
-            default:
-              filterData = query(FoodListRef, where("category1", "==", "양식"));
-          }
-          break;
-        default:
-          filterData = query(FoodListRef);
+      if (category1) {
+        filterData = query(filterData, where("category1", "==", category1));
+        if (category2) {
+          filterData = query(filterData, where("category2", "==", category2));
+        }
       }
 
-      const querySnapshot = await getDocs(filterData); //FoodList 컬렉션에 있는 모든 doc들을 배열 형태로 담는다 (비동기 처리)
-      querySnapshot.forEach((doc) => {
-        // 배열을 순회하며 모든 데이터를 출력한다
-        newData.push(doc.data());
-        console.log(newData);
-        setDataList(newData); // 가져온 데이터로 상태(State)를 업데이트합니다.
-      });
-    },
-    [FoodListRef]
-  );
+      if (category2) {
+        filterData = query(filterData, where("category2", "==", category2));
+      }
 
-  // 카테고리 클릭 시 카테고리 변경
-  const categoryClick = (category1, category2) => {
+      const querySnapshot = await getDocs(filterData);
+      querySnapshot.forEach((doc) => {
+        newData.push(doc.data());
+      });
+
+      setDataList(newData);
+    } catch (e) {
+      console.error("Error reading data: ", e);
+    }
+  }, []);
+
+  // 카테고리1 클릭 시 카테고리 변경
+  const category1Click = (category1) => {
+    // 데이터 리스트 숨기기
+    setShowDataList(false);
+    //카테고리 업데이트
     setCategory1(category1);
+    // 프로그래스바 초기화
+    setProgress(0);
+    // 로딩 컴포넌트 보이기
+    setLoadingShow((prev) => !prev);
+    // 로딩 컴포넌트 숨기기(2초 후)
+    setTimeout(() => {
+      setLoadingShow((prev) => !prev);
+    }, 2000);
+    //  데이터 리스트 보여주기
+    setTimeout(() => {
+      setShowDataList((prev) => !prev);
+    }, 2000);
+  };
+  // 카테고리2 클릭 시 카테고리 변경
+  const category2Click = (category2) => {
+    // 데이터 리스트 숨기기
+    setShowDataList(false);
+    // 카테고리 업데이트
     setCategory2(category2);
     // 프로그래스바 초기화
     setProgress(0);
@@ -197,6 +121,15 @@ const SelectFood = () => {
     setTimeout(() => {
       setLoadingShow((prev) => !prev);
     }, 2000);
+    //  데이터 리스트 보여주기
+    setTimeout(() => {
+      setShowDataList((prev) => !prev);
+    }, 2000);
+  };
+  // 카테고리 리셋
+  const categoryReset = () => {
+    setCategory1("");
+    setCategory2("");
   };
 
   // 카테고리 변경 시 재렌더링
@@ -205,6 +138,7 @@ const SelectFood = () => {
   }, [category1, category2, readData]);
 
   ////////////////////////////////////////////////// About 인풋폼
+
   // 인풋 입력값 감지 함수
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -229,36 +163,65 @@ const SelectFood = () => {
     };
   }, [progress]);
 
+  // 데이터 리스트를 보여주는 함수
+  const renderDataList = () => {
+    if (showDataList) {
+      return (
+        <>
+          <h1>데이터 리스트</h1>
+          {dataList.map((item) => (
+            <FoodItem name={item.name} place={item.place} hash={item.hash} key={item.id} />
+          ))}
+        </>
+      );
+    }
+    return null; // showDataList가 false인 경우 아무것도 렌더링하지 않음
+  };
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (
     <>
-      <h1>데이터 리스트</h1>
-      {dataList.map((item) => (
-        <div style={{ border: "1px solid black" }}>
-          {item.category1}
-          {item.category2}
-        </div>
-      ))}
-      <button onClick={() => categoryClick("한식", "")}>한식</button>
-      <button onClick={() => categoryClick("중식", "")}>중식</button>
-      <button onClick={() => categoryClick("일식", "")}>일식</button>
-      <button onClick={() => categoryClick("양식", "")}>양식</button>
+      <button onClick={() => category1Click("한식")}>한식</button>
+      <button onClick={() => category1Click("중식")}>중식</button>
+      <button onClick={() => category1Click("일식")}>일식</button>
+      <button onClick={() => category1Click("양식")}>양식</button>
       <br />
-      <button onClick={() => categoryClick("", "국물")}>국물</button>
-      <button onClick={() => categoryClick("", "볶음")}>볶음</button>
-      <button onClick={() => categoryClick("", "튀김")}>튀김</button>
+      <button onClick={() => category2Click("국물")}>국물</button>
+      <button onClick={() => category2Click("볶음")}>볶음</button>
+      <button onClick={() => category2Click("튀김")}>튀김</button>
+      <button onClick={categoryReset}>전체</button>
       <input
         name="category1"
         value={formData.category1}
         onChange={handleChange}
+        placeholder="카테고리1"
       />
       <input
         name="category2"
         value={formData.category2}
         onChange={handleChange}
+        placeholder="카테고리2"
+      />
+      <input
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="이름"
+      />
+      <input
+        name="place"
+        value={formData.place}
+        onChange={handleChange}
+        placeholder="장소"
+      />
+      <input
+        name="hash"
+        value={formData.hash}
+        onChange={handleChange}
+        placeholder="해시태그"
       />
       <button onClick={createData}>추가</button>
       {loadingShow && <LoadingComponent progress={progress} />}
+      {renderDataList()}
     </>
   );
 };
