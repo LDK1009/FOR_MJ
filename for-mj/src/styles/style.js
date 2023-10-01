@@ -3,21 +3,30 @@ import styled from "@emotion/styled";
 
 export const FlexBox = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
 `;
 
-//////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
-export const SelectFood_CategoryBtton =styled.img`
-    background-color:
-`
+//////////////////////////////////////////////////CategoryButton//////////////////////////////////////////////////
+export const CategoryButton_Container = styled.div`
+  text-align: center;
+`;
+export const CategoryButton_image = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+`;
 
+export const CategoryButton_Label = styled.div`
+  font-size: 10px;
+  font-weight: bold;
+`;
 //////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
 export const FoodItem_Container = styled.div`
   //위치
   //정렬
-  display:flex;
-  align-items:center;
-  margin:0 auto;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
   //크기
   width: 300px;
   height: 65px;
@@ -39,7 +48,7 @@ export const FoodItem_Image = styled.img`
 export const FoodItem_Name = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin-right:5px;
+  margin-right: 5px;
 `;
 
 export const FoodItem_Place = styled.div`
@@ -47,17 +56,16 @@ export const FoodItem_Place = styled.div`
 `;
 
 export const FoodItem_Hash = styled.div`
-    font-size:8px;
-`
+  font-size: 8px;
+`;
 
-export const FoodItem_TextWrap = styled.div`
-`
+export const FoodItem_TextWrap = styled.div``;
 
 //////////////////////////////////////////////////AddFoodList_Input//////////////////////////////////////////////////
 
 export const AddFoodList_Input = styled(TextField)`
-    margin-bottom:15px;
-`
+  margin-bottom: 15px;
+`;
 
 export const AddFoodList_ModalBox = styled(Box)`
   position: absolute;
@@ -67,18 +75,18 @@ export const AddFoodList_ModalBox = styled(Box)`
   width: 250px;
   background-color: white;
   border: 2px solid gray;
-  border-radius:20px;
+  border-radius: 20px;
   padding: 25px;
-`
+`;
 
 export const AddFoodList_Button = styled(Button)`
-    background-color:#BCD2A1;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    width:200px;
-    &:hover{
-        background-color:#BCD2A1;
-        opacity:0.9;
-    }
-`
+  background-color: #bcd2a1;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  width: 200px;
+  &:hover {
+    background-color: #bcd2a1;
+    opacity: 0.9;
+  }
+`;
