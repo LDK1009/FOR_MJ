@@ -4,6 +4,7 @@ import { db } from "../firebase-config";
 import { motion } from "framer-motion";
 import LoadingComponent from "../components/LoadingComponent";
 import FoodItem from "../components/FoodItem";
+import AddFoodList from "../components/AddFoodList";
 
 const SelectFood = () => {
   //////////////////////////////////////////////////변수//////////////////////////////////////////////////
@@ -20,16 +21,7 @@ const SelectFood = () => {
   // 데이터 리스트 보여주기 여부
   const [showDataList, setShowDataList] = useState(false);
 
-  ////////////////////////////////////////////////// About 인풋폼
 
-  // 폼 데이터 입력값
-  const [formData, setFormData] = useState({
-    category1: "",
-    category2: "",
-    name: "",
-    place: "",
-    hash: "",
-  });
 
   ////////////////////////////////////////////////// About 프로그래스 바
 
@@ -41,25 +33,7 @@ const SelectFood = () => {
   //////////////////////////////////////////////////함수//////////////////////////////////////////////////
 
   ////////////////////////////////////////////////// About 파이어스토어
-  //데이터 추가
-  const createData = async () => {
-    try {
-      // db라는 상수에 담은 firesre에 접근하여 FoodList 컬렉션에 문서를 추가한다.
-      // 문서명은 랜덤이며 문서에 들어갈 데이터는 중괄호 내부 내용과 같다
-      const docRef = await addDoc(collection(db, "FoodList"), {
-        category1: formData.category1,
-        category2: formData.category2,
-        name: formData.name,
-        place: formData.place,
-        hash: formData.hash,
-        timestamp: new Date(),
-      });
-      // 작업 성공 시 문서의 id 즉, 문서명을 콘솔 출력한다
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+
   //데이터 읽기
   const readData = useCallback(async (category1, category2) => {
     try {
@@ -139,16 +113,8 @@ const SelectFood = () => {
 
   ////////////////////////////////////////////////// About 인풋폼
 
-  // 인풋 입력값 감지 함수
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    // 현재 입력 필드의 name과 value를 가져옵니다.
 
-    setFormData({
-      ...formData,
-      [name]: value, // 해당 필드의 값을 업데이트합니다.
-    });
-  };
+
 
   ////////////////////////////////////////////////// About 프로그래스 바
   // progress 상태가 업데이트 될 때마다 렌더링 험수
@@ -189,37 +155,8 @@ const SelectFood = () => {
       <button onClick={() => category2Click("볶음")}>볶음</button>
       <button onClick={() => category2Click("튀김")}>튀김</button>
       <button onClick={categoryReset}>전체</button>
-      <input
-        name="category1"
-        value={formData.category1}
-        onChange={handleChange}
-        placeholder="카테고리1"
-      />
-      <input
-        name="category2"
-        value={formData.category2}
-        onChange={handleChange}
-        placeholder="카테고리2"
-      />
-      <input
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="이름"
-      />
-      <input
-        name="place"
-        value={formData.place}
-        onChange={handleChange}
-        placeholder="장소"
-      />
-      <input
-        name="hash"
-        value={formData.hash}
-        onChange={handleChange}
-        placeholder="해시태그"
-      />
-      <button onClick={createData}>추가</button>
+      <AddFoodList/>
+
       {loadingShow && <LoadingComponent progress={progress} />}
       {renderDataList()}
     </>

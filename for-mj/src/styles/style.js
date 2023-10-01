@@ -1,9 +1,15 @@
-import styled from "styled-components";
+import { Box, Button, TextField } from "@mui/material";
+import styled from "@emotion/styled";
 
 export const FlexBox = styled.div`
   display: flex;
   align-items:center;
 `;
+
+//////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
+export const SelectFood_CategoryBtton =styled.img`
+    background-color:
+`
 
 //////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
 export const FoodItem_Container = styled.div`
@@ -45,4 +51,34 @@ export const FoodItem_Hash = styled.div`
 `
 
 export const FoodItem_TextWrap = styled.div`
+`
+
+//////////////////////////////////////////////////AddFoodList_Input//////////////////////////////////////////////////
+
+export const AddFoodList_Input = styled(TextField)`
+    margin-bottom:15px;
+`
+
+export const AddFoodList_ModalBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  background-color: white;
+  border: 2px solid gray;
+  border-radius:20px;
+  padding: 25px;
+`
+
+export const AddFoodList_Button = styled(Button)`
+    background-color:#BCD2A1;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    width:200px;
+    &:hover{
+        background-color:#BCD2A1;
+        opacity:0.9;
+    }
 `
