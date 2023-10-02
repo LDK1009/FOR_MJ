@@ -1,7 +1,6 @@
 head, body, #root {
   width:400px;
   height:800px;
-  border:1px solid black;
 }
 
 #root{
