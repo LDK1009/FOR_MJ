@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { collection,  getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase-config";
-import { motion } from "framer-motion";
 import LoadingComponent from "../components/LoadingComponent";
-import FoodItem from "../components/FoodItem";
 import AddFoodList from "../components/AddFoodList";
-import { FlexBox, SelectFood_CategoryButton } from "../styles/style";
+import { FlexBox } from "../styles/style";
 import koreafood from '../assets/한국음식.jpg';
 import japanfood from '../assets/일본음식.jpg';
 import chinafood from '../assets/중국음식.jpg';
@@ -14,6 +12,7 @@ import CategoryButton from "../components/CategoryButton";
 import soapdish from '../assets/국물요리.jpg';
 import stirdish from '../assets/볶음요리.jpg';
 import frieddish from '../assets/튀김요리.jpg';
+import Footer from "../components/Footer";
 const SelectFood = () => {
   //////////////////////////////////////////////////변수//////////////////////////////////////////////////
 
@@ -27,7 +26,7 @@ const SelectFood = () => {
   const [category1, setCategory1] = useState("");
   const [category2, setCategory2] = useState("");
   // 데이터 리스트 보여주기 여부
-  const [showDataList, setShowDataList] = useState(false);
+  const [showDataList, setShowDataList] = useState(true);
 
 
 
@@ -83,11 +82,11 @@ const SelectFood = () => {
     // 로딩 컴포넌트 숨기기(2초 후)
     setTimeout(() => {
       setLoadingShow((prev) => !prev);
-    }, 2000);
+    }, 1000);
     //  데이터 리스트 보여주기
     setTimeout(() => {
       setShowDataList((prev) => !prev);
-    }, 2000);
+    }, 1000);
   };
   // 카테고리2 클릭 시 카테고리 변경
   const category2Click = (category2) => {
@@ -99,14 +98,14 @@ const SelectFood = () => {
     setProgress(0);
     // 로딩 컴포넌트 보이기
     setLoadingShow((prev) => !prev);
-    // 로딩 컴포넌트 숨기기(2초 후)
+    // 로딩 컴포넌트 숨기기(1초 후)
     setTimeout(() => {
       setLoadingShow((prev) => !prev);
-    }, 2000);
+    }, 1000);
     //  데이터 리스트 보여주기
     setTimeout(() => {
       setShowDataList((prev) => !prev);
-    }, 2000);
+    }, 1000);
   };
   // 카테고리 리셋
   const categoryReset = () => {
@@ -131,7 +130,7 @@ const SelectFood = () => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 100 : prevProgress + 10
       );
-    }, 120);
+    }, 80);
     return () => {
       clearInterval(timer); //이전에 생성된 타이머를 정지시키는 역할을 한다 즉, 이전 useEffect 실행에서 생성된 타이머를 정지하고 새로운 타이머를 시작하는 것을 방지합니다. 이를 통해 타이머가 중복 실행되거나 충돌하는 것을 방지하고, 원활한 프로그래스 바 업데이트를 보장합니다.
     };
@@ -143,9 +142,9 @@ const SelectFood = () => {
       return (
         <>
           <h1>데이터 리스트</h1>
-          {dataList.map((item) => (
+          {/* {dataList.map((item) => (
             <FoodItem name={item.name} place={item.place} hash={item.hash} key={item.id} />
-          ))}
+          ))} */}
         </>
       );
     }
@@ -171,6 +170,7 @@ const SelectFood = () => {
 
       {loadingShow && <LoadingComponent progress={progress} />}
       {renderDataList()}
+      <Footer/>
     </>
   );
 };
