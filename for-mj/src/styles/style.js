@@ -211,6 +211,7 @@ export const HomeButton_Link = styled(Link)`
 export const Footer_Container = styled.div`
   background-color: #dfeecc;
   position: absolute;
+  bottom:0px;
   display: flex;
   align-items:center;
   padding: 10px 0px;
