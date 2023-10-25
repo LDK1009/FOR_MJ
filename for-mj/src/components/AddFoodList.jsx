@@ -28,8 +28,7 @@ const AddFoodList = () => {
     category1: "",
     category2: "",
     name: "",
-    place: "",
-    hash: "",
+    descript: "",
   });
 
   //데이터 추가
@@ -41,16 +40,15 @@ const AddFoodList = () => {
         category1: formData.category1,
         category2: formData.category2,
         name: formData.name,
-        place: formData.place,
-        hash: formData.hash,
+        descript: formData.descript,
         timestamp: new Date(),
       });
+      // 인풋폼 비우기
       setFormData({
         category1: "",
         category2: "",
         name: "",
-        place: "",
-        hash: "",
+        descript: "",
       });
       // 작업 성공 시 문서의 id 즉, 문서명을 콘솔 출력한다
       console.log("Document written with ID: ", docRef.id);
@@ -85,30 +83,21 @@ const AddFoodList = () => {
             />
             <AddFoodList_Input
               id="standard-basic"
-              label="이름"
+              label="메뉴 이름"
               variant="standard"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="ex) 니뽕내뽕"
+              placeholder="ex) 돈까스"
             />
             <AddFoodList_Input
               id="standard-basic"
-              label="장소"
+              label="메뉴 소개"
               variant="standard"
-              name="place"
-              value={formData.place}
+              name="descript"
+              value={formData.descript}
               onChange={handleChange}
-              placeholder="ex) 천안 불당동"
-            />
-            <AddFoodList_Input
-              id="standard-basic"
-              label="해시태그"
-              variant="standard"
-              name="hash"
-              value={formData.hash}
-              onChange={handleChange}
-              placeholder="ex) #힐링 #카페 #디저트"
+              placeholder="ex) 남자의 소울푸드 돈까스!"
             />
           <AddFoodList_Button onClick={createData}>추가</AddFoodList_Button>
           </FlexBox>

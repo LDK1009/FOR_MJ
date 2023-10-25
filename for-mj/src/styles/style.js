@@ -107,6 +107,7 @@ export const SelectPlayGround_Container = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 export const SelectPlayGround_Wrap = styled.div``;
 
 export const SelectPlayGround_CategoryContainer = styled.div`
@@ -119,6 +120,7 @@ export const SelectPlayGround_CategoryContainer = styled.div`
   border-radius: 20px;
   box-shadow: 1px 1px 3px 1px #e5fde5;
 `;
+
 export const SelectPlayGround_CategoryWrap = styled.div`
   width: 280px;
 `;
@@ -137,23 +139,22 @@ export const SelectPlayGround_DataList = styled.div`
   box-shadow: 3px 3px 1px 3px #def5da;
 `;
 
-export const SelectPlayGround_WeatherCategoryTextWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
+export const SelectPlayGround_NoDataList = styled(SelectPlayGround_DataList)`
+  height: auto;
 `;
-export const SelectPlayGround_WeatherText = styled.div`
+
+export const SelectPlayGround_CategoryText = styled.div`
+  text-align: center;
   font-size: 15px;
   font-weight: 600;
   color: coral;
-  /* margin-right: 10px; */
+  margin-bottom: 20px;
 `;
 
-export const SelectPlayGround_CategoryText = styled(
-  SelectPlayGround_WeatherText
-)`
-  margin: 0;
+export const SelectPlayGround_NoDataText = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 //////////////////////////////////////////////////LoadingComponent//////////////////////////////////////////////////
@@ -211,9 +212,9 @@ export const HomeButton_Link = styled(Link)`
 export const Footer_Container = styled.div`
   background-color: #dfeecc;
   position: absolute;
-  bottom:0px;
+  bottom: 0px;
   display: flex;
-  align-items:center;
+  align-items: center;
   padding: 10px 0px;
   width: 100%;
   height: 50px;
@@ -226,4 +227,45 @@ export const Footer_item = styled.div`
 export const Footer_Link = styled(Link)`
   text-decoration: none;
   color: black;
-`
+`;
+
+//////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
+export const FoodItem_Container = styled.div`
+  width: 260px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f8f0e5;
+  margin: 20px 0px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 1px 3px #def5da;
+`;
+export const FoodItem_Title = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+`;
+export const FoodItem_Image = styled.img`
+  border-radius: 100%;
+  margin: 30px 0px;
+`;
+export const FoodItem_MenuText = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+`;
+export const FoodItem_Descript = styled.div`
+  font-size: 20px;
+  margin-top: 15px;
+`;
+
+export const FoodItem_CategoryText = styled(SelectPlayGround_CategoryText)``;
+
+export const FoodItem_NoDataText = styled(SelectPlayGround_NoDataText)``;
+//////////////////////////////////////////////////SelectFood//////////////////////////////////////////////////
+export const SelectFood_Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const SelectFood_Wrap = styled.div``;
