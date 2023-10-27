@@ -22,79 +22,63 @@ import frieddish from "../assets/튀김요리.jpg";
 import Footer from "../components/Footer";
 import FoodItem from "../components/FoodItem";
 
-
 const SelectFood = () => {
-  //////////////////////////////////////////////////변수//////////////////////////////////////////////////
-
-  ////////////////////////////////////////////////// About 파이어스토어
-
-  // 컬렉션 참조
+  ////////////////////////////////////////////////// 변수 About 파이어스토어
+  //////////////////// 컬렉션 참조
   const FoodListRef = collection(db, "FoodList");
-  // db 데이터 리스트
+  //////////////////// 모든 DB 데이터
+  const [allData, setAllData] = useState([]);
+  //////////////////// 필터링 된 데이터
+  const [filteredData, setFilteredData] = useState([]);
+  //////////////////// 랜덤 넘버
+  const [randomNumber, setRandomNumber] = useState(0);
+  //////////////////// 랜덤하게 뽑은 데이터 1개
   const [randomData, setRandomData] = useState({});
-  // 카테고리 상태
+  //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState("");
   const [category2, setCategory2] = useState("");
-  // 데이터 리스트 보여주기 여부
-  const [showDataList, setShowDataList] = useState(true);
 
-    // 무작위 데이터 렌더링을 위한 랜덤 넘버
-    const [randomNumber, setRandomNumber] = useState(0);
-    // 필터링 된 데이터를 잠시 옮겨 담을 배열
-    const [tempData, setTempData] = useState([]);
-
-
-  ////////////////////////////////////////////////// About 프로그래스 바
-
-  // 진행도
-  const [progress, setProgress] = React.useState(0);
-  // 로딩 컴포넌트 렌더링 여부
-  const [loadingShow, setLoadingShow] = useState(false);
-
-  //////////////////////////////////////////////////함수//////////////////////////////////////////////////
-
-  ////////////////////////////////////////////////// About 파이어스토어
-
-  //데이터 읽기
+  ////////////////////////////////////////////////// 함수 About 파이어스토어
+  //////////////////// 데이터 읽기
   const readData = useCallback(async (category1, category2) => {
     try {
       const newData = [];
-      let filterData = FoodListRef; // FoodList 컬렉션의 참조를 filterData에 담는다  기본적으로 모든 데이터를 필터링 없이 가져온다
 
-      
+      // 카테고리 선택시 필터링
+      // if (category1) {
+      //   filterData = query(filterData, where("category1", "==", category1));
+      //   if (category2) {
+      //     filterData = query(filterData, where("category2", "==", category2));
+      //   }
+      // }
 
-      // 카테고리 선택시 필터링   
-      if (category1) {
-        filterData = query(filterData, where("category1", "==", category1));
-        if (category2) {
-          filterData = query(filterData, where("category2", "==", category2));
-        }
-      }
+      // if (category2) {
+      //   filterData = query(filterData, where("category2", "==", category2));
+      // }
 
-      if (category2) {
-        filterData = query(filterData, where("category2", "==", category2));
-      }
+      const querySnapshot = await getDocs(FoodListRef);
 
-      const querySnapshot = await getDocs(filterData);
       querySnapshot.forEach((doc) => {
         newData.push(doc.data());
       });
 
-      setTempData(newData);
+      setAllData(newData);
+      console.log("모든 데이터 확인>>");
+      console.log(allData);
     } catch (e) {
       console.error("Error reading data: ", e);
     }
   }, []);
 
-  // 카테고리1 클릭 시 카테고리 변경
+  //////////////////// 카테고리1 클릭 시 카테고리 변경
   const category1Click = (category1) => {
     // 랜덤 넘버 설정
-    setRandomNumber(Math.round(Math.random() * (tempData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
+    setRandomNumber(Math.round(Math.random() * (allData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
     // randomData를 newData배열의 랜덤한 요소로 세팅한다
-    setRandomData(tempData[randomNumber]);
+    setRandomData(allData[randomNumber]);
     /////////////////
     console.log("랜덤 데이터");
-    console.log(randomData);    
+    console.log(randomData);
     // 데이터 리스트 숨기기
     setShowDataList(false);
     //카테고리 업데이트
@@ -112,12 +96,13 @@ const SelectFood = () => {
       setShowDataList((prev) => !prev);
     }, 1000);
   };
-  // 카테고리2 클릭 시 카테고리 변경
+
+  //////////////////// 카테고리2 클릭 시 카테고리 변경
   const category2Click = (category2) => {
     // 랜덤 넘버 설정
-    setRandomNumber(Math.round(Math.random() * (tempData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
+    setRandomNumber(Math.round(Math.random() * (allData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
     // randomData를 newData배열의 랜덤한 요소로 세팅한다
-    setRandomData(tempData[randomNumber]);    
+    setRandomData(allData[randomNumber]);
     // 데이터 리스트 숨기기
     setShowDataList(false);
     // 카테고리 업데이트
@@ -135,20 +120,22 @@ const SelectFood = () => {
       setShowDataList((prev) => !prev);
     }, 1000);
   };
-  // 카테고리 리셋
+
+  //////////////////// 카테고리 리셋
   const categoryReset = () => {
     setCategory1("");
     setCategory2("");
   };
 
+  ////////////////////////////////////////////////// 변수 About 프로그래스 바
 
-  ////////////////////////////////////////////////// About 인풋폼
+  //////////////////// 진행도
+  const [progress, setProgress] = React.useState(0);
+  //////////////////// 로딩 컴포넌트 렌더링 여부
+  const [loadingShow, setLoadingShow] = useState(false);
 
-
-
-
-  ////////////////////////////////////////////////// About 프로그래스 바
-  // progress 상태가 업데이트 될 때마다 렌더링 험수
+  ////////////////////////////////////////////////// 함수 About 프로그래스 바
+  //////////////////// progress 상태가 업데이트 될 때마다 렌더링 험수
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
@@ -160,10 +147,15 @@ const SelectFood = () => {
     };
   }, [progress]);
 
-  // 데이터 리스트를 보여주는 함수
+  ////////////////////////////////////////////////// 변수 About 렌더링
+  //////////////////// 데이터 보여주기 여부
+  const [showDataList, setShowDataList] = useState(true);
+
+  ////////////////////////////////////////////////// 함수 About 렌더링
+  //////////////////// 데이터 리스트를 보여주는 함수
   const renderDataList = () => {
     if (showDataList) {
-         if (randomData && randomData.name && randomData.descript) {
+      if (randomData && randomData.name && randomData.descript) {
         // randomData가 존재하고 name 속성이 있는지 확인
         return (
           <>
@@ -177,7 +169,7 @@ const SelectFood = () => {
         return (
           <FoodItem_Container>
             <FoodItem_CategoryText>
-            {category1}&emsp;/&emsp;{category2}
+              {category1}&emsp;/&emsp;{category2}
             </FoodItem_CategoryText>
             <FoodItem_NoDataText>
               데이터가 없어용 😢
@@ -191,12 +183,11 @@ const SelectFood = () => {
     return null; // showDataList가 false인 경우 아무것도 렌더링하지 않음
   };
 
-
-  // 카테고리 변경 시 재렌더링
+  ////////////////////////////////////////////////// About useEffect
+  //////////////////// 카테고리 변경 시 재렌더링
   useEffect(() => {
     readData(category1, category2);
-  }, [category1, category2, readData, renderDataList]);
-
+  }, [category1, category2]);
 
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (
@@ -258,7 +249,7 @@ const SelectFood = () => {
           {renderDataList()}
         </SelectFood_Wrap>
       </SelectFood_Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };
