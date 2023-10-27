@@ -30,10 +30,8 @@ const SelectFood = () => {
   const [allData, setAllData] = useState([]);
   //////////////////// 필터링 된 데이터
   const [filteredData, setFilteredData] = useState([]);
-  //////////////////// 랜덤 넘버
-  const [randomNumber, setRandomNumber] = useState(0);
   //////////////////// 랜덤하게 뽑은 데이터 1개
-  const [randomData, setRandomData] = useState({});
+  const [randomedData, setRandomedData] = useState({});
   //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState("");
   const [category2, setCategory2] = useState("");
@@ -42,43 +40,57 @@ const SelectFood = () => {
   //////////////////// 데이터 읽기
   const readData = useCallback(async (category1, category2) => {
     try {
+      console.log("=====readData 함수 실행=====");
       const newData = [];
-
-      // 카테고리 선택시 필터링
-      // if (category1) {
-      //   filterData = query(filterData, where("category1", "==", category1));
-      //   if (category2) {
-      //     filterData = query(filterData, where("category2", "==", category2));
-      //   }
-      // }
-
-      // if (category2) {
-      //   filterData = query(filterData, where("category2", "==", category2));
-      // }
-
       const querySnapshot = await getDocs(FoodListRef);
 
       querySnapshot.forEach((doc) => {
         newData.push(doc.data());
       });
 
-      setAllData(newData);
-      console.log("모든 데이터 확인>>");
-      console.log(allData);
+      setAllData(()=>newData); // allData를 읽은 데이터로 세팅
     } catch (e) {
       console.error("Error reading data: ", e);
     }
   }, []);
 
+  
+  
+  //////////////////// 데이터 필터링
+  const filterData = (P_allData, P_category1=false, P_category2=false) => {
+    const returnData = [];
+
+
+    // 카테고리1이 설정되어 있을 경우 필터링
+    if(P_category1){
+      returnData = P_allData.filter((item) => {
+        return (item.category1 === P_category1) && (item.category2 === P_category2);  
+      });
+    }
+    // 카테고리1이 설정되어 있지 않을 경우 필터링
+    else{
+      returnData = P_allData.filter((item) => {
+        return (item.category2 === P_category2);  
+      });
+    }
+
+    setFilteredData(()=>returnData);
+  };
+  
+  
+  
+  //////////////////// 데이터 랜덤화
+  const randomData = () => {
+    const randomNumber =  Math.round(Math.random() * (filteredData.length - 1)); // 0이상 ~ 배열 크기 미만의 무작위 정수 생성
+    setRandomedData(()=>filteredData[randomNumber]) // 필터링 된 데이터 중 무작위 인덱스의 데이터를 randomedData에 넣는다
+  }
+
+
+
+
   //////////////////// 카테고리1 클릭 시 카테고리 변경
   const category1Click = (category1) => {
-    // 랜덤 넘버 설정
-    setRandomNumber(Math.round(Math.random() * (allData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
-    // randomData를 newData배열의 랜덤한 요소로 세팅한다
-    setRandomData(allData[randomNumber]);
-    /////////////////
-    console.log("랜덤 데이터");
-    console.log(randomData);
+    filterData(allData, category1)
     // 데이터 리스트 숨기기
     setShowDataList(false);
     //카테고리 업데이트
@@ -100,9 +112,11 @@ const SelectFood = () => {
   //////////////////// 카테고리2 클릭 시 카테고리 변경
   const category2Click = (category2) => {
     // 랜덤 넘버 설정
-    setRandomNumber(Math.round(Math.random() * (allData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
+    // setRandomNumber(Math.round(Math.random() * (allData.length - 1))); // 0 이상 배열 크기 미만의 무작위 정수 생성
     // randomData를 newData배열의 랜덤한 요소로 세팅한다
-    setRandomData(allData[randomNumber]);
+    // setRandomData(allData[randomNumber]);
+
+
     // 데이터 리스트 숨기기
     setShowDataList(false);
     // 카테고리 업데이트
@@ -155,13 +169,13 @@ const SelectFood = () => {
   //////////////////// 데이터 리스트를 보여주는 함수
   const renderDataList = () => {
     if (showDataList) {
-      if (randomData && randomData.name && randomData.descript) {
+      // if (randomData && randomData.name && randomData.descript) {
         // randomData가 존재하고 name 속성이 있는지 확인
         return (
           <>
             <FoodItem
-              menuText={randomData.name}
-              descript={randomData.descript}
+              // menuText={randomData.name}
+              // descript={randomData.descript}
             />
           </>
         );
@@ -179,15 +193,16 @@ const SelectFood = () => {
           </FoodItem_Container>
         ); // 데이터가 없는 경우 메시지를 표시
       }
-    }
+    // }
     return null; // showDataList가 false인 경우 아무것도 렌더링하지 않음
   };
 
   ////////////////////////////////////////////////// About useEffect
-  //////////////////// 카테고리 변경 시 재렌더링
+  //////////////////// 마운트 시 실행
   useEffect(() => {
+    console.log("=====새로고침 useEffect 테스트=====");
     readData(category1, category2);
-  }, [category1, category2]);
+  }, []);
 
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (
