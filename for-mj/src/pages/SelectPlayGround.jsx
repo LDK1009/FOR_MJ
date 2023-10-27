@@ -7,16 +7,24 @@ import PlayGroundItem from "../components/PlayGroundItem";
 import AddFoodList from "../components/AddFoodList";
 import {
   FlexBox,
+  SelectFood_CategoryButton,
   SelectPlayGround_CategoryContainer,
   SelectPlayGround_CategoryText,
   SelectPlayGround_CategoryWrap,
   SelectPlayGround_Container,
   SelectPlayGround_DataList,
-  SelectPlayGround_NoDataList,
-  SelectPlayGround_NoDataText,
+  SelectPlayGround_WeatherCategoryTextWrap,
+  SelectPlayGround_WeatherText,
   SelectPlayGround_Wrap,
 } from "../styles/style";
+import koreafood from "../assets/한국음식.jpg";
+import japanfood from "../assets/일본음식.jpg";
+import chinafood from "../assets/중국음식.jpg";
+import westernfood from "../assets/서양음식.jpg";
 import CategoryButton from "../components/CategoryButton";
+import soapdish from "../assets/국물요리.jpg";
+import stirdish from "../assets/볶음요리.jpg";
+import frieddish from "../assets/튀김요리.jpg";
 import AddPlayGround from "../components/AddPlayGround";
 import testimg from "../assets/공룡_로딩.jpg";
 import Footer from "../components/Footer";
@@ -138,27 +146,35 @@ const SelectPlayGround = () => {
       if (dataList.length === 0) {
         return (
           <>
-          <SelectPlayGround_NoDataList>
-            <SelectPlayGround_CategoryText>
-            {weather}&emsp;/&emsp;{category}
-            </SelectPlayGround_CategoryText>
-            <SelectPlayGround_NoDataText>
-              데이터가 없어용 😢
-              <br />
-              데이터를 추가해주세용!
-            </SelectPlayGround_NoDataText>
-          </SelectPlayGround_NoDataList>
+            <SelectPlayGround_DataList style={{ textAlign: "center" }}>
+              <SelectPlayGround_WeatherCategoryTextWrap>
+                <SelectPlayGround_WeatherText>
+                  {weather}&emsp;
+                </SelectPlayGround_WeatherText>
+                <SelectPlayGround_CategoryText>
+                  /&emsp;{category}
+                </SelectPlayGround_CategoryText>
+              </SelectPlayGround_WeatherCategoryTextWrap>
+              <h3>
+                데이터가 없어용 😢
+                <br />
+                데이터를 추가해주세용!
+              </h3>
+            </SelectPlayGround_DataList>
           </>
         );
       } else {
         return (
           <>
             <SelectPlayGround_DataList>
-            
-            <SelectPlayGround_CategoryText>
-            {weather}&emsp;/&emsp;{category}
-            </SelectPlayGround_CategoryText>
-
+              <SelectPlayGround_WeatherCategoryTextWrap>
+                <SelectPlayGround_WeatherText>
+                  {weather}&emsp;
+                </SelectPlayGround_WeatherText>
+                <SelectPlayGround_CategoryText>
+                  /&emsp;{category}
+                </SelectPlayGround_CategoryText>
+              </SelectPlayGround_WeatherCategoryTextWrap>
               {dataList.map((item) => (
                 <PlayGroundItem
                   name={item.name}
