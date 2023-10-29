@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db, storage } from "../firebase-config";
 import LoadingComponent from "../components/LoadingComponent";
 import AddFoodList from "../components/AddFoodList";
 import {
@@ -21,10 +21,11 @@ import stirdish from "../assets/볶음요리.jpg";
 import frieddish from "../assets/튀김요리.jpg";
 import Footer from "../components/Footer";
 import FoodItem from "../components/FoodItem";
+import { ref, uploadBytes } from "firebase/storage";
 
 const SelectFood = () => {
   ////////////////////////////////////////////////// 변수 About 파이어스토어
-  //////////////////// 컬렉션 참조
+  //////////////////// db 참조
   const FoodListRef = collection(db, "FoodList");
   //////////////////// 모든 DB 데이터
   const [allData, setAllData] = useState([]);
@@ -32,6 +33,12 @@ const SelectFood = () => {
   const [filteredData, setFilteredData] = useState({});
   //////////////////// 랜덤하게 뽑은 데이터 1개
   const [randomedData, setRandomedData] = useState({});
+  //////////////////// storage 최상위 참조
+  // const storageRef = ref(storage);
+  // 업로드할 이미지 데이터
+  const [storageUploadImg, setStorageUploadImg] = useState("");
+  //////////////////// storage 하위 이미지 폴더 참조
+  const storageRef = ref(storage, `images/${storageUploadImg.name}`); // 이미지를 저장할 때에는 업로드하는 이미지의 파일명을 경로로 추가하여 image 폴더 하위에 파일명으로 파일이 저장되도록한다.
   //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState(null);
   const [category2, setCategory2] = useState(null);
@@ -145,6 +152,13 @@ const SelectFood = () => {
     setCategory1("");
     setCategory2("");
   };
+
+  //////////////////// 업로드 버튼 클릭 시 이미지 업로드 함수
+  const imageUploadOnStorage = () => {
+      uploadBytes(storageRef, storageUploadImg).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
+    };
 
   ////////////////////////////////////////////////// 변수 About 프로그래스 바
 
@@ -279,6 +293,14 @@ const SelectFood = () => {
           {/* 보여줄 데이터 */}
           {loadingShow && <LoadingComponent progress={progress} />}
           {renderDataList()}
+          <input
+            type="file"
+            onChange={(e) => {
+              setStorageUploadImg(e.target.files[0]);
+            }}
+          />
+          <button onClick={imageUploadOnStorage}>업로드</button>
+          {storageUploadImg.name}
         </SelectFood_Wrap>
       </SelectFood_Container>
       <Footer />
