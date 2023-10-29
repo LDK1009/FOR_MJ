@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db, storage } from "../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase-config";
 import LoadingComponent from "../components/LoadingComponent";
 import AddFoodList from "../components/AddFoodList";
 import {
@@ -21,7 +21,6 @@ import stirdish from "../assets/볶음요리.jpg";
 import frieddish from "../assets/튀김요리.jpg";
 import Footer from "../components/Footer";
 import FoodItem from "../components/FoodItem";
-import { ref, uploadBytes } from "firebase/storage";
 
 const SelectFood = () => {
   ////////////////////////////////////////////////// 변수 About 파이어스토어
@@ -33,12 +32,6 @@ const SelectFood = () => {
   const [filteredData, setFilteredData] = useState({});
   //////////////////// 랜덤하게 뽑은 데이터 1개
   const [randomedData, setRandomedData] = useState({});
-  //////////////////// storage 최상위 참조
-  // const storageRef = ref(storage);
-  // 업로드할 이미지 데이터
-  const [storageUploadImg, setStorageUploadImg] = useState("");
-  //////////////////// storage 하위 이미지 폴더 참조
-  const storageRef = ref(storage, `images/${storageUploadImg.name}`); // 이미지를 저장할 때에는 업로드하는 이미지의 파일명을 경로로 추가하여 image 폴더 하위에 파일명으로 파일이 저장되도록한다.
   //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState(null);
   const [category2, setCategory2] = useState(null);
@@ -64,11 +57,6 @@ const SelectFood = () => {
   //////////////////// 데이터 필터링
   const filterData = (P_allData, P_category1 = null, P_category2 = null) => {
     let returnData = [];
-
-    // 카테고리1만 설정되어 있을 경우 => 카테고리 1에 해당 데이터
-    // 카테고리2만 설정되어 있을 경우 => 카테고리 1에 해당 데이터
-    // 카테고리1만 설정되어 있을 경우 => 카테고리 1에 해당 데이터
-    // 카테고리1만 설정되어 있을 경우 => 카테고리 1에 해당 데이터
 
     // 카테고리1이 설정되어 있을 경우
     if (P_category1) {
@@ -96,16 +84,13 @@ const SelectFood = () => {
     }
 
     console.log("returnData값 >> " + returnData);
+    // 데이터 랜덤화
     const randomNumber = Math.round(Math.random() * (returnData.length - 1)); // 0이상 ~ 배열 크기 미만의 무작위 정수 생성
     setFilteredData(() => returnData[randomNumber]); // 필터링 된 데이터 중 무작위 인덱스의 데이터를 randomedData에 넣는다
     console.log(filteredData);
   };
 
-  //////////////////// 데이터 랜덤화
-  const randomData = () => {
-    const randomNumber = Math.round(Math.random() * (filteredData.length - 1)); // 0이상 ~ 배열 크기 미만의 무작위 정수 생성
-    setRandomedData(() => filteredData[randomNumber]); // 필터링 된 데이터 중 무작위 인덱스의 데이터를 randomedData에 넣는다
-  };
+
 
   //////////////////// 카테고리1 클릭 시 카테고리 변경
   const category1Click = (category1) => {
@@ -152,13 +137,6 @@ const SelectFood = () => {
     setCategory1("");
     setCategory2("");
   };
-
-  //////////////////// 업로드 버튼 클릭 시 이미지 업로드 함수
-  const imageUploadOnStorage = () => {
-      uploadBytes(storageRef, storageUploadImg).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      });
-    };
 
   ////////////////////////////////////////////////// 변수 About 프로그래스 바
 
@@ -293,14 +271,6 @@ const SelectFood = () => {
           {/* 보여줄 데이터 */}
           {loadingShow && <LoadingComponent progress={progress} />}
           {renderDataList()}
-          <input
-            type="file"
-            onChange={(e) => {
-              setStorageUploadImg(e.target.files[0]);
-            }}
-          />
-          <button onClick={imageUploadOnStorage}>업로드</button>
-          {storageUploadImg.name}
         </SelectFood_Wrap>
       </SelectFood_Container>
       <Footer />
