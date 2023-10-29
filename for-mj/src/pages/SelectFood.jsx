@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { db, storage } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { ref, getDownloadURL } from "firebase/storage";
 import LoadingComponent from "../components/LoadingComponent";
 import AddFoodList from "../components/AddFoodList";
 import {
@@ -35,6 +36,7 @@ const SelectFood = () => {
   //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState(null);
   const [category2, setCategory2] = useState(null);
+  //////////////////// 로드한 이미지의 src
 
   ////////////////////////////////////////////////// 함수 About 파이어스토어
   //////////////////// 데이터 읽기
@@ -90,8 +92,6 @@ const SelectFood = () => {
     console.log(filteredData);
   };
 
-
-
   //////////////////// 카테고리1 클릭 시 카테고리 변경
   const category1Click = (category1) => {
     //카테고리 업데이트
@@ -138,6 +138,35 @@ const SelectFood = () => {
     setCategory2("");
   };
 
+
+
+
+  ////////////////////////////////////////////////// 변수 About 스토리지
+
+
+  //////////////////// 다운로드한 이미지 url
+  const [loadedImgSrc, setLoadedImgSrc] = useState("FoodListImages/김치찌개.jpg");
+  
+  //////////////////// 다운로드할 이미지의 스토리지 경로
+  // const [storageImagePath, setStorageImagePath] = useState(null);
+
+
+  ////////////////////////////////////////////////// 함수 About 스토리지
+  const LoadImage = (storageImagePath)=>{
+    const pathReference = ref(storage, `FoodListImages/${storageImagePath}`);
+    getDownloadURL(pathReference)
+    .then((url) => {
+      setLoadedImgSrc(url);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+
+
+
+
   ////////////////////////////////////////////////// 변수 About 프로그래스 바
 
   //////////////////// 진행도
@@ -173,6 +202,7 @@ const SelectFood = () => {
             <FoodItem
               menuText={filteredData.name} // filteredData를 사용
               descript={filteredData.descript} // filteredData를 사용
+              ImgSrc={loadedImgSrc}
             />
           </>
         );
@@ -212,6 +242,13 @@ const SelectFood = () => {
     //필터링
     filterData(allData, category1, category2);
   }, [category1, category2]);
+  
+  //////////////////// 필터링 된 데이터 변경 시 이미지 불러오기
+  useEffect(() => {
+    if(filteredData && filteredData.src){
+      LoadImage(filteredData.src);
+    }
+  }, [filteredData]);
 
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (

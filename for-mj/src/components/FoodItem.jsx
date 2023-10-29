@@ -8,11 +8,11 @@ import {
   FoodItem_Wrap,
 } from "../styles/style";
 
-const FoodItem = ({ src, menuText, descript }) => {
+const FoodItem = ({ ImgSrc, menuText, descript }) => {
   return (
       <FoodItem_Container>
         <FoodItem_Title>오늘의 메뉴는?</FoodItem_Title>
-        <FoodItem_Image alt="menuImage" />
+        <FoodItem_Image src={ImgSrc} alt="menuImage" />
         <FoodItem_MenuText>{menuText}</FoodItem_MenuText>
         <FoodItem_Descript>{descript}</FoodItem_Descript>
       </FoodItem_Container>

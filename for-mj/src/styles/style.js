@@ -245,6 +245,8 @@ export const FoodItem_Title = styled.div`
 `;
 export const FoodItem_Image = styled.img`
   border-radius: 100%;
+  width: 200px;
+  height: 200px;
   margin: 30px 0px;
 `;
 export const FoodItem_MenuText = styled.div`

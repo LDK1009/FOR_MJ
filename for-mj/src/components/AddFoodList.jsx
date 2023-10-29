@@ -42,6 +42,7 @@ const AddFoodList = () => {
         category2: formData.category2,
         name: formData.name,
         descript: formData.descript,
+        src: storageUploadImg.name,
         timestamp: new Date(),
       });
       // 인풋폼 비우기
@@ -64,7 +65,7 @@ const AddFoodList = () => {
   //////////////////// storage에 업로드할 이미지 데이터
   const [storageUploadImg, setStorageUploadImg] = useState("");
   //////////////////// storage 하위 이미지 폴더 참조
-  const storageRef = ref(storage, `images/${storageUploadImg.name}`); // 이미지를 저장할 때에는 업로드하는 이미지의 파일명을 경로로 추가하여 image 폴더 하위에 파일명으로 파일이 저장되도록한다.
+  const storageRef = ref(storage, `FoodListImages/${storageUploadImg.name}`); // 이미지를 저장할 때에는 업로드하는 이미지의 파일명을 경로로 추가하여 image 폴더 하위에 파일명으로 파일이 저장되도록한다.
 
   ////////////////////////////////////////////////// 함수 About Storage
   ////////////////////이미지 업로드 함수
