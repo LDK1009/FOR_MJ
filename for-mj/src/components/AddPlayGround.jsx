@@ -103,12 +103,12 @@ const AddPlayGround = () => {
             />
             <AddFoodList_Input
               id="standard-basic"
-              label="삭당명"
+              label="업소명"
               variant="standard"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="ex) 니뽕내뽕"
+              placeholder="ex) 예당호 모노레일"
             />
             <AddFoodList_Input
               id="standard-basic"

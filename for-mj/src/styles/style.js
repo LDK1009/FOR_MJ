@@ -54,15 +54,22 @@ export const PlayGroundItem_Image = styled.img`
 export const PlayGroundItem_Name = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin-right: 5px;
+  margin: 5px 0px 3px 20px;
 `;
 
 export const PlayGroundItem_Place = styled.div`
   font-size: 10px;
+  margin: 3px;
+  margin-left: 20px;
+  &:hover{
+    cursor:pointer;
+  }
 `;
 
 export const PlayGroundItem_Hash = styled.div`
   font-size: 8px;
+  margin: 3px;
+  margin-left: 20px;
 `;
 
 export const PlayGroundItem_TextWrap = styled.div``;
@@ -100,6 +107,7 @@ export const AddFoodList_Button = styled(Button)`
 export const AddFoodList_ModalButton = styled(AddFoodList_Button)`
   background-color: #79ac78;
   height: 30px;
+  box-shadow: 2px 2px 1px 0.001px #A3CBA4;
 `;
 
 //////////////////////////////////////////////////SelectPlayGround//////////////////////////////////////////////////
@@ -113,7 +121,7 @@ export const SelectPlayGround_CategoryContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px;
+  margin: 45px 0px;
   background-color: #d0e7d2;
   padding: 10px;
   border-radius: 20px;
@@ -125,7 +133,7 @@ export const SelectPlayGround_CategoryWrap = styled.div`
 
 export const SelectPlayGround_DataList = styled.div`
   width: 260px;
-  height: 350px;
+  height: 330px;
   overflow: auto;
   &::-webkit-scrollbar {
     display: none;
@@ -134,7 +142,7 @@ export const SelectPlayGround_DataList = styled.div`
   background-color: #f8f0e5;
   margin: 20px 0px;
   border-radius: 20px;
-  box-shadow: 3px 3px 1px 3px #def5da;
+  box-shadow: 2px 2px 2px 2px lightgray;
 `;
 
 export const SelectPlayGround_NoDataList = styled(SelectPlayGround_DataList)`
@@ -210,12 +218,12 @@ export const HomeButton_Link = styled(Link)`
 export const Footer_Container = styled.div`
   background-color: #dfeecc;
   position: absolute;
-  bottom:0px;
+  bottom: 0px;
   display: flex;
-  align-items:center;
+  align-items: center;
   padding: 10px 0px;
   width: 100%;
-  height: 50px;
+  height: 30px;
 `;
 
 export const Footer_item = styled.div`
@@ -225,7 +233,7 @@ export const Footer_item = styled.div`
 export const Footer_Link = styled(Link)`
   text-decoration: none;
   color: black;
-`
+`;
 //////////////////////////////////////////////////FoodItem//////////////////////////////////////////////////
 export const FoodItem_Container = styled.div`
   width: 260px;

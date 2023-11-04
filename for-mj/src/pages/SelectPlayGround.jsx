@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase-config";
-import { motion } from "framer-motion";
 import LoadingComponent from "../components/LoadingComponent";
 import PlayGroundItem from "../components/PlayGroundItem";
-import AddFoodList from "../components/AddFoodList";
 import {
   FlexBox,
   SelectPlayGround_CategoryContainer,
@@ -20,8 +18,12 @@ import CategoryButton from "../components/CategoryButton";
 import AddPlayGround from "../components/AddPlayGround";
 import testimg from "../assets/공룡_로딩.jpg";
 import Footer from "../components/Footer";
+import { useNavigate } from 'react-router-dom';
 
 const SelectPlayGround = () => {
+  const navigate = useNavigate(); // 네비게이트 훅 
+
+
   //////////////////////////////////////////////////DB//////////////////////////////////////////////////
   // 컬렉션 참조 변수
   const PlayGroundRef = collection(db, "PlayGroundList");
@@ -55,6 +57,55 @@ const SelectPlayGround = () => {
       console.error("Error reading data: ", e);
     }
   }, []);
+
+  //////////////////// showDataList가 true일 때만 데이터 리스트를 보여주기
+  
+
+  
+  const renderDataList = () => {
+    if (showDataList) {
+      if (dataList.length === 0) {
+        return (
+          <>
+          <SelectPlayGround_NoDataList>
+            <SelectPlayGround_CategoryText>
+            {weather}&emsp;/&emsp;{category}
+            </SelectPlayGround_CategoryText>
+            <SelectPlayGround_NoDataText>
+              데이터가 없어용 😢
+              <br />
+              데이터를 추가해주세용!
+            </SelectPlayGround_NoDataText>
+          </SelectPlayGround_NoDataList>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <SelectPlayGround_DataList>
+            <SelectPlayGround_CategoryText>
+            {weather}&emsp;/&emsp;{category}
+            </SelectPlayGround_CategoryText>
+
+              {dataList.map((item, index) => (
+                <PlayGroundItem
+                  name={item.name}
+                  location={item.location}
+                  hash={item.hash}
+                  url={item.url}
+                  key={index}
+                  onClick={()=>navigate('/Diary', { state : item.name })}
+                />
+              ))}
+            </SelectPlayGround_DataList>
+          </>
+        );
+      }
+    }
+    return null; // showDataList가 false인 경우 아무것도 렌더링하지 않음
+  };
+
+
 
   //////////////////////////////////////////////////날씨&카테고리//////////////////////////////////////////////////
   // 날씨, 카테고리 변수
@@ -133,48 +184,6 @@ const SelectPlayGround = () => {
     };
   }, [progress]);
 
-  // showDataList가 true일 때만 데이터 리스트를 보여주는 함수
-  const renderDataList = () => {
-    if (showDataList) {
-      if (dataList.length === 0) {
-        return (
-          <>
-          <SelectPlayGround_NoDataList>
-            <SelectPlayGround_CategoryText>
-            {weather}&emsp;/&emsp;{category}
-            </SelectPlayGround_CategoryText>
-            <SelectPlayGround_NoDataText>
-              데이터가 없어용 😢
-              <br />
-              데이터를 추가해주세용!
-            </SelectPlayGround_NoDataText>
-          </SelectPlayGround_NoDataList>
-          </>
-        );
-      } else {
-        return (
-          <>
-            <SelectPlayGround_DataList>
-            <SelectPlayGround_CategoryText>
-            {weather}&emsp;/&emsp;{category}
-            </SelectPlayGround_CategoryText>
-
-              {dataList.map((item) => (
-                <PlayGroundItem
-                  name={item.name}
-                  location={item.location}
-                  hash={item.hash}
-                  url={item.url}
-                  key={item.id}
-                />
-              ))}
-            </SelectPlayGround_DataList>
-          </>
-        );
-      }
-    }
-    return null; // showDataList가 false인 경우 아무것도 렌더링하지 않음
-  };
 
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (
