@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FOR_MJ/static/css/main.645bc9a0.css",
-    "main.js": "/FOR_MJ/static/js/main.ecb29c48.js",
+    "main.js": "/FOR_MJ/static/js/main.bb46b1ce.js",
     "static/js/787.6be62a62.chunk.js": "/FOR_MJ/static/js/787.6be62a62.chunk.js",
     "static/media/한국음식.jpg": "/FOR_MJ/static/media/한국음식.52f8c3abf50e8e964571.jpg",
     "static/media/일본음식.jpg": "/FOR_MJ/static/media/일본음식.044091d851c2b75f6410.jpg",
@@ -18,11 +18,11 @@
     "static/media/국물요리.jpg": "/FOR_MJ/static/media/국물요리.24faf95a7aa56ab27f9f.jpg",
     "index.html": "/FOR_MJ/index.html",
     "main.645bc9a0.css.map": "/FOR_MJ/static/css/main.645bc9a0.css.map",
-    "main.ecb29c48.js.map": "/FOR_MJ/static/js/main.ecb29c48.js.map",
+    "main.bb46b1ce.js.map": "/FOR_MJ/static/js/main.bb46b1ce.js.map",
     "787.6be62a62.chunk.js.map": "/FOR_MJ/static/js/787.6be62a62.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.645bc9a0.css",
-    "static/js/main.ecb29c48.js"
+    "static/js/main.bb46b1ce.js"
   ]
 }
