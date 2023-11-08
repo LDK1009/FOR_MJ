@@ -9,8 +9,12 @@ import {
   FoodItem_CategoryText,
   FoodItem_Container,
   FoodItem_NoDataText,
+  SelectFood_CategoryContainer,
+  SelectFood_CategoryWrap,
   SelectFood_Container,
+  SelectFood_JustifyCenter,
   SelectFood_Wrap,
+  SelectPlayGround_CategoryContainer,
 } from "../styles/style";
 import koreafood from "../assets/한국음식.jpg";
 import japanfood from "../assets/일본음식.jpg";
@@ -138,34 +142,27 @@ const SelectFood = () => {
     setCategory2("");
   };
 
-
-
-
   ////////////////////////////////////////////////// 변수 About 스토리지
 
-
   //////////////////// 다운로드한 이미지 url
-  const [loadedImgSrc, setLoadedImgSrc] = useState("FoodListImages/김치찌개.jpg");
-  
+  const [loadedImgSrc, setLoadedImgSrc] = useState(
+    "FoodListImages/김치찌개.jpg"
+  );
+
   //////////////////// 다운로드할 이미지의 스토리지 경로
   // const [storageImagePath, setStorageImagePath] = useState(null);
 
-
   ////////////////////////////////////////////////// 함수 About 스토리지
-  const LoadImage = (storageImagePath)=>{
+  const LoadImage = (storageImagePath) => {
     const pathReference = ref(storage, `FoodListImages/${storageImagePath}`);
     getDownloadURL(pathReference)
-    .then((url) => {
-      setLoadedImgSrc(url);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-
-
-
-
+      .then((url) => {
+        setLoadedImgSrc(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   ////////////////////////////////////////////////// 변수 About 프로그래스 바
 
@@ -242,10 +239,10 @@ const SelectFood = () => {
     //필터링
     filterData(allData, category1, category2);
   }, [category1, category2]);
-  
+
   //////////////////// 필터링 된 데이터 변경 시 이미지 불러오기
   useEffect(() => {
-    if(filteredData && filteredData.src){
+    if (filteredData && filteredData.src) {
       LoadImage(filteredData.src);
     }
   }, [filteredData]);
@@ -255,55 +252,58 @@ const SelectFood = () => {
     <>
       <SelectFood_Container>
         <SelectFood_Wrap>
-          {/* 카테고리 버튼 */}
-          <FlexBox>
-            <CategoryButton
-              src={koreafood}
-              label="한식"
-              onClick={() => category1Click("한식")}
-            ></CategoryButton>
-            <CategoryButton
-              src={chinafood}
-              label="중식"
-              onClick={() => category1Click("중식")}
-            ></CategoryButton>
-            <CategoryButton
-              src={japanfood}
-              label="일식"
-              onClick={() => category1Click("일식")}
-            ></CategoryButton>
-            <CategoryButton
-              src={westernfood}
-              label="양식"
-              onClick={() => category1Click("양식")}
-            ></CategoryButton>
-          </FlexBox>
-          <FlexBox>
-            <CategoryButton
-              src={soapdish}
-              label="국물"
-              onClick={() => category2Click("국물")}
-            >
-              국물
-            </CategoryButton>
-            <CategoryButton
-              src={stirdish}
-              label="볶음"
-              onClick={() => category2Click("볶음")}
-            >
-              볶음
-            </CategoryButton>
-            <CategoryButton
-              src={frieddish}
-              label="튀김"
-              onClick={() => category2Click("튀김")}
-            >
-              튀김
-            </CategoryButton>
-          </FlexBox>
-          <button onClick={categoryReset}>전체</button>
-          {/* 데이터 추가하기 버튼 */}
-          <AddFoodList />
+          <SelectFood_JustifyCenter>
+          <SelectFood_CategoryContainer>
+            {/* 카테고리 버튼 */}
+            <SelectFood_CategoryWrap>
+              <div>
+              <FlexBox>
+                <CategoryButton
+                  src={koreafood}
+                  label="한식"
+                  onClick={() => category1Click("한식")}
+                ></CategoryButton>
+                <CategoryButton
+                  src={chinafood}
+                  label="중식"
+                  onClick={() => category1Click("중식")}
+                ></CategoryButton>
+                <CategoryButton
+                  src={japanfood}
+                  label="일식"
+                  onClick={() => category1Click("일식")}
+                ></CategoryButton>
+              </FlexBox>
+              <FlexBox>
+                <CategoryButton
+                  src={soapdish}
+                  label="국물"
+                  onClick={() => category2Click("국물")}
+                >
+                  국물
+                </CategoryButton>
+                <CategoryButton
+                  src={stirdish}
+                  label="볶음"
+                  onClick={() => category2Click("볶음")}
+                >
+                  볶음
+                </CategoryButton>
+                <CategoryButton
+                  src={frieddish}
+                  label="튀김"
+                  onClick={() => category2Click("튀김")}
+                >
+                  튀김
+                </CategoryButton>
+              </FlexBox>
+              {/* <button onClick={categoryReset}>전체</button> */}
+              {/* 데이터 추가하기 버튼 */}
+              <AddFoodList />
+              </div>
+            </SelectFood_CategoryWrap>
+          </SelectFood_CategoryContainer>
+          </SelectFood_JustifyCenter>
 
           {/* 보여줄 데이터 */}
           {loadingShow && <LoadingComponent progress={progress} />}

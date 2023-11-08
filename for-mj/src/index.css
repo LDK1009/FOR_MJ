@@ -1,7 +1,15 @@
-head, body, #root {
-  width:400px;
-  height:800px;
+header, body, #root {
+  width: 1920px;
+  height: 1080px;
 }
+
+@media (max-width: 768px) {
+  header, body, #root {
+    width: 420px;
+    height: 820px;
+  }
+}
+
 
 #root{
   background-image: url('./assets/공룡_빼꼼.jpg');

@@ -9,7 +9,9 @@ import {
   AddFoodList_Input,
   AddFoodList_ModalBox,
   AddFoodList_Button,
+  AddFoodList_ModalButton,
 } from "../styles/style";
+import FileSelectButton from "./FileSelectButton";
 
 const AddFoodList = () => {
   ////////////////////////////////////////////////// 변수 About FireStore
@@ -85,7 +87,11 @@ const AddFoodList = () => {
   return (
     <>
       {/* 클릭 전 보여줄 내용 작성(클릭 시 open state를 true로 변경하여 모달 창을 연다) */}
-      <button onClick={handleOpen}>데이터 추가하기</button>
+      <FlexBox style={{ justifyContent: "center" }}>
+        <AddFoodList_ModalButton onClick={handleOpen}>
+          데이터 추가하기
+        </AddFoodList_ModalButton>
+      </FlexBox>{" "}
       <Modal open={open} onClose={handleClose}>
         <AddFoodList_ModalBox>
           <FlexBox style={{ flexDirection: "column" }}>
@@ -125,8 +131,8 @@ const AddFoodList = () => {
               onChange={handleChange}
               placeholder="ex) 남자의 소울푸드 돈까스!"
             />
-            <input
-              type="file"
+            <FileSelectButton
+              fileName={storageUploadImg.name}
               onChange={(e) => {
                 setStorageUploadImg(e.target.files[0]);
               }}

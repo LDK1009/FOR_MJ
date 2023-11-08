@@ -245,7 +245,7 @@ export const FoodItem_Container = styled.div`
   background-color: #f8f0e5;
   margin: 20px 0px;
   border-radius: 20px;
-  box-shadow: 3px 3px 1px 3px #def5da;
+  box-shadow: 2px 2px 2px 2px lightgray;
 `;
 export const FoodItem_Title = styled.div`
   font-size: 30px;
@@ -270,6 +270,21 @@ export const FoodItem_CategoryText = styled(SelectPlayGround_CategoryText)``;
 
 export const FoodItem_NoDataText = styled(SelectPlayGround_NoDataText)``;
 //////////////////////////////////////////////////SelectFood//////////////////////////////////////////////////
+export const SelectFood_CategoryWrap = styled.div`
+  display:flex;
+  justify-content:center;
+`
+export const SelectFood_CategoryContainer = styled(SelectPlayGround_CategoryContainer)`
+  display:inline-block;
+  padding:10px 20px;
+`
+
+export const SelectFood_JustifyCenter = styled.div`
+  display:flex;
+  justify-content:center;
+`
+
+
 export const SelectFood_Container = styled.div`
   display: flex;
   justify-content: center;

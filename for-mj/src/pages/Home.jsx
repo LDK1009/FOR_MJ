@@ -20,7 +20,7 @@ const Home = () => {
         <Home_ButtonWrap>
           <Home_FlexBox>
             <HomeButton path="/SelectPlayGround" src={PlaySrc} text="놀거리"></HomeButton>
-            <HomeButton path="/SelectFood" src={MealSrc} text="식사"></HomeButton>
+            <HomeButton path="/SelectFood" src={MealSrc} text="먹거리"></HomeButton>
           </Home_FlexBox>
           <Home_FlexBox>
             <HomeButton path="/" src={PenaltySrc} text="벌칙"></HomeButton>
