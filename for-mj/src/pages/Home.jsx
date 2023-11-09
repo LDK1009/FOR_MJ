@@ -24,7 +24,7 @@ const Home = () => {
           </Home_FlexBox>
           <Home_FlexBox>
             <HomeButton path="/" src={PenaltySrc} text="벌칙"></HomeButton>
-            <HomeButton path="/" src={DiarySrc} text="일기"></HomeButton>
+            <HomeButton path="/Diary" src={DiarySrc} text="일기"></HomeButton>
           </Home_FlexBox>
         </Home_ButtonWrap>
       </Home_FullContainer>
