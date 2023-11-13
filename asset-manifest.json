@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/FOR_MJ/static/css/main.778d518c.css",
-    "main.js": "/FOR_MJ/static/js/main.79ed0c95.js",
-    "static/js/787.6be62a62.chunk.js": "/FOR_MJ/static/js/787.6be62a62.chunk.js",
-    "static/media/한국음식.jpg": "/FOR_MJ/static/media/한국음식.52f8c3abf50e8e964571.jpg",
-    "static/media/일본음식.jpg": "/FOR_MJ/static/media/일본음식.044091d851c2b75f6410.jpg",
-    "static/media/서양음식.jpg": "/FOR_MJ/static/media/서양음식.3819c0f0db895b9036cf.jpg",
-    "static/media/홈_식사.jpg": "/FOR_MJ/static/media/홈_식사.cf39e14e1361d48c1afe.jpg",
-    "static/media/홈_놀거리.jpg": "/FOR_MJ/static/media/홈_놀거리.ae7cab2ba2321483a7ba.jpg",
-    "static/media/공룡_로딩.jpg": "/FOR_MJ/static/media/공룡_로딩.28b37f54508b35b33209.jpg",
-    "static/media/홈_일기.jpg": "/FOR_MJ/static/media/홈_일기.a481a7fce0a714b126c1.jpg",
-    "static/media/중국음식.jpg": "/FOR_MJ/static/media/중국음식.264a6511869d5bf8cd7f.jpg",
-    "static/media/홈_벌칙.jpg": "/FOR_MJ/static/media/홈_벌칙.ba4eb5e219c63fcb833e.jpg",
-    "static/media/볶음요리.jpg": "/FOR_MJ/static/media/볶음요리.cb3030bf5bf2be056e81.jpg",
-    "static/media/공룡_빼꼼.jpg": "/FOR_MJ/static/media/공룡_빼꼼.98a4767bc3f76d8eb626.jpg",
-    "static/media/튀김요리.jpg": "/FOR_MJ/static/media/튀김요리.120a09c81b2ce8f7218b.jpg",
-    "static/media/국물요리.jpg": "/FOR_MJ/static/media/국물요리.24faf95a7aa56ab27f9f.jpg",
-    "index.html": "/FOR_MJ/index.html",
-    "main.778d518c.css.map": "/FOR_MJ/static/css/main.778d518c.css.map",
-    "main.79ed0c95.js.map": "/FOR_MJ/static/js/main.79ed0c95.js.map",
-    "787.6be62a62.chunk.js.map": "/FOR_MJ/static/js/787.6be62a62.chunk.js.map"
+    "main.css": "/formj-fromdk.site/static/css/main.da81da49.css",
+    "main.js": "/formj-fromdk.site/static/js/main.4d15838e.js",
+    "static/js/787.6be62a62.chunk.js": "/formj-fromdk.site/static/js/787.6be62a62.chunk.js",
+    "static/media/한국음식.jpg": "/formj-fromdk.site/static/media/한국음식.52f8c3abf50e8e964571.jpg",
+    "static/media/일본음식.jpg": "/formj-fromdk.site/static/media/일본음식.044091d851c2b75f6410.jpg",
+    "static/media/서양음식.jpg": "/formj-fromdk.site/static/media/서양음식.3819c0f0db895b9036cf.jpg",
+    "static/media/홈_식사.jpg": "/formj-fromdk.site/static/media/홈_식사.cf39e14e1361d48c1afe.jpg",
+    "static/media/홈_놀거리.jpg": "/formj-fromdk.site/static/media/홈_놀거리.ae7cab2ba2321483a7ba.jpg",
+    "static/media/공룡_로딩.jpg": "/formj-fromdk.site/static/media/공룡_로딩.28b37f54508b35b33209.jpg",
+    "static/media/홈_일기.jpg": "/formj-fromdk.site/static/media/홈_일기.a481a7fce0a714b126c1.jpg",
+    "static/media/중국음식.jpg": "/formj-fromdk.site/static/media/중국음식.264a6511869d5bf8cd7f.jpg",
+    "static/media/홈_벌칙.jpg": "/formj-fromdk.site/static/media/홈_벌칙.ba4eb5e219c63fcb833e.jpg",
+    "static/media/볶음요리.jpg": "/formj-fromdk.site/static/media/볶음요리.cb3030bf5bf2be056e81.jpg",
+    "static/media/공룡_빼꼼.jpg": "/formj-fromdk.site/static/media/공룡_빼꼼.98a4767bc3f76d8eb626.jpg",
+    "static/media/튀김요리.jpg": "/formj-fromdk.site/static/media/튀김요리.120a09c81b2ce8f7218b.jpg",
+    "static/media/국물요리.jpg": "/formj-fromdk.site/static/media/국물요리.24faf95a7aa56ab27f9f.jpg",
+    "index.html": "/formj-fromdk.site/index.html",
+    "main.da81da49.css.map": "/formj-fromdk.site/static/css/main.da81da49.css.map",
+    "main.4d15838e.js.map": "/formj-fromdk.site/static/js/main.4d15838e.js.map",
+    "787.6be62a62.chunk.js.map": "/formj-fromdk.site/static/js/787.6be62a62.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.778d518c.css",
-    "static/js/main.79ed0c95.js"
+    "static/css/main.da81da49.css",
+    "static/js/main.4d15838e.js"
   ]
 }
