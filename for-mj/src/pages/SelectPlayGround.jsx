@@ -94,7 +94,7 @@ const SelectPlayGround = () => {
                   hash={item.hash}
                   url={item.url}
                   key={index}
-                  onClick={()=>navigate('/Diary', { state : item.name })}
+                  onClick={()=>navigate('/Diary', { state : '일기_' + item.name })} //네비게이트 페이지로 state 라는 프롭스를 보낸다
                 />
               ))}
             </SelectPlayGround_DataList>

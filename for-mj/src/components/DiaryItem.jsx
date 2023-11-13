@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const DiaryItem = ({number}) => {
+const DiaryItem = ({date, descript, imgsrc}) => {
   return (
     <>
       <Container_DiaryItem>
-        {number}
+        <div>날짜:{date}</div>
+        <div>일기:{descript}</div>
+        <img src={imgsrc}></img>
       </Container_DiaryItem>
-    </>
+      </>
   );
 };
 
