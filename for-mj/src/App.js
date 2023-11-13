@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from "react-router-dom"; // Remove the redund
 const App = () => {
   return (
     <>
+    {/* 도메인 오류 해결! */}
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Home />} />
