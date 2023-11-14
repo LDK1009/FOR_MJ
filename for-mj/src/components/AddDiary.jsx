@@ -38,11 +38,12 @@ const AddDiary = ({ diaryName }) => {
     try {
       // db라는 상수에 담은 firesre에 접근하여 FoodList 컬렉션에 문서를 추가한다.
       // 문서명은 랜덤이며 문서에 들어갈 데이터는 중괄호 내부 내용과 같다
-      const docRef = await addDoc(collection(db, diaryName), {
+      const docRef = await addDoc(collection(db, "AllDiary"), {
         date: formData.date,
         descript: formData.descript,
         src: storageUploadImg.name,
         timestamp: new Date(),
+        classification:diaryName,
       });
 
       // 인풋폼 비우기

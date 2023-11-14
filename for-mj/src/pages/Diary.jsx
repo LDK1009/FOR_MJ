@@ -7,61 +7,93 @@ import { db } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import AddDiary from "../components/AddDiary";
 import { useEffect } from "react";
+import { FoodItem_CategoryText, FoodItem_Container, FoodItem_NoDataText } from "../styles/style";
 
 const Diary = () => {
-  //////////////////////////////////////////////////**//////////////////////////////////////////////////
-  ////////////////////네비게이트 프롭스 설정(location.state로 사용한다.)
-  const location = useLocation();
-
-  const data = ["Item 1", "Item 2", "Item 3", "Item 4"];
-  const ItemList = () => {
-    return allData.map((item, index) => (
-      <DiaryItem
-        key={index}
-        date={item.date}
-        descript={item.descript}
-        imgsrc={item.src}
-      />
-    ));
-  };
-
-  //////////////////////////////////////////////////파이어 스토어//////////////////////////////////////////////////
+  //////////////////////////////////////////////////State//////////////////////////////////////////////////
   //////////////////// db 참조
-  const DiaryRef = collection(db, location.state);
-
+  const DiaryRef = collection(db, "AllDiary");
   //////////////////// 컬렉션에서 불러온 모든 데이터
   const [allData, setAllData] = useState([]);
+  //////////////////// 필터링된 데이터
+  const [filteredData, setFilteredData] = useState([]);
+  ////////////////////네비게이트 프롭스 설정(location.state로 사용한다.)
+  const location = useLocation();
+  ////////////////////홈에서 일기를 선택했을 때 디폴트 
 
-  //////////////////// 데이터 가져오기
+
+
+  //////////////////////////////////////////////////파이어 스토어//////////////////////////////////////////////////
+  //////////////////// AllDiary컬렉션의 모든 데이터 가져오기
   const readData = useCallback(async () => {
     try {
-      console.log("=====readData 함수 실행=====");
       const newData = [];
       const querySnapshot = await getDocs(DiaryRef); // 컬렉션 참조 연결
-
       // 컬렉션에 있는 데이터들을 모두 newData로 옮겨 담는다.
       querySnapshot.forEach((doc) => {
         newData.push(doc.data());
       });
-
       setAllData(newData); // allData를 newData로 복제한다.
     } catch (e) {
       // 에러 감지
       console.error("Error reading data: ", e);
     }
   }, []);
+  //////////////////////////////////////////////////**//////////////////////////////////////////////////
 
+  const FilteringData = () => {
+    let fd = allData.filter((item)=>item.classification===location.state);
+    // 홈에서 일기 버튼을 선택한 상황이라면
+    if (location.state==="all") {
+      setFilteredData(allData);
+    }
+    // SelectPlayGround에서 선택했다면
+    else {
+      setFilteredData(fd);
+    }
+  };
+
+  const renderFilteredItem = () =>{
+    if (filteredData.length===0) {
+              return (
+            <FoodItem_NoDataText>
+              데이터가 없어용 😢
+              <br />
+              데이터를 추가해주세용!
+            </FoodItem_NoDataText>
+        ); // 데이터가 없는 경우 메시지를 표시
+    }
+    else{
+      return (
+        filteredData.map((item, index) => 
+        (
+          <DiaryItem
+            key={index}
+            date={item.date}
+            descript={item.descript}
+            imgsrc={item.src}
+          />
+        ))
+      );
+    }
+
+  }
   //////////////////////////////////////////////////스토리지//////////////////////////////////////////////////
 
-
   //////////////////////////////////////////////////useEffect//////////////////////////////////////////////////
+  ////////////////////마운트 시에 데이터 불러오기
   useEffect(() => {
     readData();
   }, []);
 
+  ////////////////////데이터 불러온 후 필터링
   useEffect(() => {
-    ItemList();
+    FilteringData();
   }, [allData]);
+
+  useEffect(() => {
+    console.log(filteredData);
+  }, [filteredData]);
 
   //////////////////////////////////////////////////렌더링//////////////////////////////////////////////////
   return (
@@ -74,7 +106,7 @@ const Diary = () => {
           <ItemWrap_Diary>
             {/* {data.map((ItemNum, index) => 
       (<DiaryItem key={index} number={ItemNum}/>))} */}
-            {ItemList()}
+            {renderFilteredItem()}
           </ItemWrap_Diary>
           <AddDiary diaryName={location.state} />
         </MainWrap_Diary>
