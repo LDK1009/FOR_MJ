@@ -12,7 +12,7 @@ header, body, #root {
 
 
 #root{
-  background-image: url('./assets/공룡_빼꼼.jpg');
+  background-image: url('./assets/images/etc/공룡_빼꼼.jpg');
   background-size: cover;
   position:relative;
 }

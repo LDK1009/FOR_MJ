@@ -16,7 +16,10 @@ import {
 } from "../styles/style";
 import CategoryButton from "../components/CategoryButton";
 import AddPlayGround from "../components/AddPlayGround";
-import testimg from "../assets/공룡_로딩.jpg";
+import shine from "../assets/images/playground/맑음.png";
+import cloud from "../assets/images/playground/구름.png";
+import rain from "../assets/images/playground/비.png";
+import snow from "../assets/images/playground/눈.png";
 import Footer from "../components/Footer";
 import { useNavigate } from 'react-router-dom';
 
@@ -195,46 +198,20 @@ const SelectPlayGround = () => {
             <SelectPlayGround_CategoryWrap>
               <FlexBox>
                 <CategoryButton
-                  src={testimg}
-                  label="맑음"
+                  src={shine}
                   onClick={() => weatherClick("맑음")}
                 />
                 <CategoryButton
-                  src={testimg}
-                  label="구름"
+                  src={cloud}
                   onClick={() => weatherClick("구름")}
                 />
                 <CategoryButton
-                  src={testimg}
-                  label="비"
+                  src={rain}
                   onClick={() => weatherClick("비")}
                 />
                 <CategoryButton
-                  src={testimg}
-                  label="눈"
+                  src={snow}
                   onClick={() => weatherClick("눈")}
-                />
-              </FlexBox>
-              <FlexBox>
-                <CategoryButton
-                  src={testimg}
-                  label="액티비티"
-                  onClick={() => categoryClick("액티비티")}
-                />
-                <CategoryButton
-                  src={testimg}
-                  label="힐링"
-                  onClick={() => categoryClick("힐링")}
-                />
-                <CategoryButton
-                  src={testimg}
-                  label="여행"
-                  onClick={() => categoryClick("여행")}
-                />
-                <CategoryButton
-                  src={testimg}
-                  label="문화"
-                  onClick={() => categoryClick("문화")}
                 />
               </FlexBox>
             </SelectPlayGround_CategoryWrap>

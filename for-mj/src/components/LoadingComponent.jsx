@@ -1,5 +1,5 @@
 import React from "react";
-import imgsrc from "../assets/공룡_로딩.jpg";
+import imgsrc from "../assets/images/etc/공룡_로딩.jpg";
 import Box from "@mui/material/Box";
 import LinearProgressWithLabel from "./LinearProgressWithLabel";
 import { LoadingComponent_Container } from "../styles/style";

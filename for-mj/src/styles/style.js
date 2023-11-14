@@ -198,6 +198,7 @@ export const HomeButton_Container = styled.div`
 export const HomeButton_Image = styled.img`
   width: 150px;
   height: 150px;
+  border:3px solid #A9A9A9;
   border-radius: 50px;
   background-color: #fff8ea;
   &:hover {

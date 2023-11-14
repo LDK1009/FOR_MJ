@@ -6,10 +6,10 @@ import {
   Home_FlexBox,
   Home_FullContainer,
 } from "../styles/style";
-import PlaySrc from "../assets/홈_놀거리.jpg";
-import MealSrc from "../assets/홈_식사.jpg";
-import PenaltySrc from "../assets/홈_벌칙.jpg";
-import DiarySrc from "../assets/홈_일기.jpg";
+import PlaySrc from "../assets/images/home/놀거리2.png";
+import MealSrc from "../assets/images/home/먹거리.png";
+import PenaltySrc from "../assets/images/home/벌칙.png";
+import DiarySrc from "../assets/images/home/일기.png";
 import HomeButton from "../components/HomeButton";
 import Footer from "../components/Footer";
 
@@ -19,12 +19,12 @@ const Home = () => {
       <Home_FullContainer>
         <Home_ButtonWrap>
           <Home_FlexBox>
-            <HomeButton path="/SelectPlayGround" src={PlaySrc} text="놀거리"></HomeButton>
-            <HomeButton path="/SelectFood" src={MealSrc} text="먹거리"></HomeButton>
+            <HomeButton path="/SelectPlayGround" src={PlaySrc} ></HomeButton>
+            <HomeButton path="/SelectFood" src={MealSrc} ></HomeButton>
           </Home_FlexBox>
           <Home_FlexBox>
-            <HomeButton path="/" src={PenaltySrc} text="벌칙"></HomeButton>
-            <HomeButton path="/Diary" src={DiarySrc} text="일기" navigateProps="all"></HomeButton>
+            <HomeButton path="/" src={PenaltySrc} ></HomeButton>
+            <HomeButton path="/Diary" src={DiarySrc}  navigateProps="all"></HomeButton>
           </Home_FlexBox>
         </Home_ButtonWrap>
       </Home_FullContainer>

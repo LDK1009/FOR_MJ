@@ -16,14 +16,13 @@ import {
   SelectFood_Wrap,
   SelectPlayGround_CategoryContainer,
 } from "../styles/style";
-import koreafood from "../assets/한국음식.jpg";
-import japanfood from "../assets/일본음식.jpg";
-import chinafood from "../assets/중국음식.jpg";
-import westernfood from "../assets/서양음식.jpg";
+import koreafood from "../assets/images/food/한식.png";
+import japanfood from "../assets/images/food/일식.png";
+import chinafood from "../assets/images/food/중식.png";
+import westernfood from "../assets/images/food/양식.png";
 import CategoryButton from "../components/CategoryButton";
-import soapdish from "../assets/국물요리.jpg";
-import stirdish from "../assets/볶음요리.jpg";
-import frieddish from "../assets/튀김요리.jpg";
+import schoolfood from "../assets/images/food/분식.png";
+import snack from "../assets/images/food/간식.png";
 import Footer from "../components/Footer";
 import FoodItem from "../components/FoodItem";
 
@@ -260,41 +259,35 @@ const SelectFood = () => {
                   <FlexBox>
                     <CategoryButton
                       src={koreafood}
-                      label="한식"
                       onClick={() => category1Click("한식")}
                     ></CategoryButton>
                     <CategoryButton
                       src={chinafood}
-                      label="중식"
                       onClick={() => category1Click("중식")}
                     ></CategoryButton>
                     <CategoryButton
                       src={japanfood}
-                      label="일식"
                       onClick={() => category1Click("일식")}
                     ></CategoryButton>
                   </FlexBox>
                   <FlexBox>
                     <CategoryButton
-                      src={soapdish}
-                      label="국물"
-                      onClick={() => category2Click("국물")}
+                      src={westernfood}
+                      onClick={() => category2Click("양식")}
                     >
-                      국물
+                      양식
                     </CategoryButton>
                     <CategoryButton
-                      src={stirdish}
-                      label="볶음"
-                      onClick={() => category2Click("볶음")}
+                      src={schoolfood}
+                      onClick={() => category2Click("분식")}
                     >
-                      볶음
+                      분식
                     </CategoryButton>
                     <CategoryButton
-                      src={frieddish}
-                      label="튀김"
-                      onClick={() => category2Click("튀김")}
+                      src={snack}
+                      onClick={() => category2Click("간식")}
                     >
-                      튀김
+                      간식
                     </CategoryButton>
                   </FlexBox>
                   {/* <button onClick={categoryReset}>전체</button> */}
