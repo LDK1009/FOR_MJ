@@ -23,7 +23,7 @@ const Home = () => {
             <HomeButton path="/SelectFood" src={MealSrc} ></HomeButton>
           </Home_FlexBox>
           <Home_FlexBox>
-            <HomeButton path="/" src={PenaltySrc} ></HomeButton>
+            <HomeButton path="/Penalty" src={PenaltySrc} ></HomeButton>
             <HomeButton path="/Diary" src={DiarySrc}  navigateProps="all"></HomeButton>
           </Home_FlexBox>
         </Home_ButtonWrap>

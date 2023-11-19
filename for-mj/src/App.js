@@ -5,6 +5,7 @@ import SelectPlayGround from "./pages/SelectPlayGround";
 import Home from "./pages/Home";
 import Diary from "./pages/Diary";
 import { BrowserRouter as Router } from "react-router-dom"; // Remove the redundant 'Route' import
+import Penalty from "./pages/Penalty";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/SelectPlayGround" element={<SelectPlayGround />} />
           <Route path="/SelectFood" element={<SelectFood />} />
           <Route path="/Diary" element={<Diary />} />
+          <Route path="/Penalty" element={<Penalty />} />
         </Routes>
       </BrowserRouter>
     </>
