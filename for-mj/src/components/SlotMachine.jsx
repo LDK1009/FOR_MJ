@@ -28,15 +28,16 @@ const SlotMachine = () => {
 
   // 슬롯 멈추기 함수
   const slotStop = () => {
-    changeSlotSpeed(0, 0.5); // 속도 줄이기 1
-    changeSlotSpeed(2000, 1); // 속도 줄이기 2
-    changeSlotSpeed(4000, 2); // 속도 줄이기 3
+    changeSlotSpeed(0, 0.2); // 속도 줄이기 1
+    changeSlotSpeed(1, 0.5); // 속도 줄이기 1
+    changeSlotSpeed(3000, 1); // 속도 줄이기 2
+    changeSlotSpeed(5000, 2); // 속도 줄이기 3
     setTimeout(() => {
       setSlotVariants(() => ({})); // 슬롯 멈추기(애니메이션 속성 객체를 모두 초기화 시켜 슬롯을 멈춘다.)
-    }, 8200);
+    }, 9200);
   };
 
-  // 슬롯 속도 변화 함수
+  // 슬롯 머신 속도 변화 함수
   const changeSlotSpeed = (delay, speed) => {
     setTimeout(() => {
       setSlotVariants((prev) => ({
