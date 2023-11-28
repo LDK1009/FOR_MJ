@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.68057f21.css",
-    "main.js": "/static/js/main.f774d284.js",
+    "main.js": "/static/js/main.2dd133ee.js",
     "static/js/787.6be62a62.chunk.js": "/static/js/787.6be62a62.chunk.js",
     "static/media/공룡_로딩.jpg": "/static/media/공룡_로딩.28b37f54508b35b33209.jpg",
     "static/media/놀거리2.png": "/static/media/놀거리2.c7b61e8777e3f1cc17f1.png",
@@ -21,11 +21,11 @@
     "static/media/공룡_빼꼼.jpg": "/static/media/공룡_빼꼼.98a4767bc3f76d8eb626.jpg",
     "index.html": "/index.html",
     "main.68057f21.css.map": "/static/css/main.68057f21.css.map",
-    "main.f774d284.js.map": "/static/js/main.f774d284.js.map",
+    "main.2dd133ee.js.map": "/static/js/main.2dd133ee.js.map",
     "787.6be62a62.chunk.js.map": "/static/js/787.6be62a62.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.68057f21.css",
-    "static/js/main.f774d284.js"
+    "static/js/main.2dd133ee.js"
   ]
 }
