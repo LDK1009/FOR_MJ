@@ -29,7 +29,7 @@ const DiaryItem = ({ date, descript, imgsrc }) => {
       <Container_DiaryItem>
           <TextContentsWrap_DiaryItem>
             <Date_DiaryItem>날짜:{date}</Date_DiaryItem>
-            <Descript_DiaryItem>일기:{descript}무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지무지막지</Descript_DiaryItem>
+            <Descript_DiaryItem>일기:{descript}</Descript_DiaryItem>
           </TextContentsWrap_DiaryItem>
           {/* 좌우측 정렬을 위한 div */}
           <div style={{flexGrow:'1'}}></div> 
