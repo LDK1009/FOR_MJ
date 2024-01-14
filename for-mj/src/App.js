@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
     {/* 도메인 오류 해결! */}
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/SelectPlayGround" element={<SelectPlayGround />} />
