@@ -38,7 +38,6 @@ const SelectFood = () => {
   const [randomedData, setRandomedData] = useState({});
   //////////////////// 카테고리 선택 상태
   const [category1, setCategory1] = useState(null);
-  const [category2, setCategory2] = useState(null);
   //////////////////// 로드한 이미지의 src
 
   ////////////////////////////////////////////////// 함수 About 파이어스토어
@@ -59,33 +58,22 @@ const SelectFood = () => {
     }
   }, []);
 
+  //////////////////////////// 테스트 코드
+  useEffect(() => {
+    console.log(allData);
+  }, [allData]);
+  ///////////////////////////////
+
+
   //////////////////// 데이터 필터링
-  const filterData = (P_allData, P_category1 = null, P_category2 = null) => {
+  const filterData = (P_allData, P_category1 = null) => {
     let returnData = [];
 
     // 카테고리1이 설정되어 있을 경우
     if (P_category1) {
-      // 카테고리 1과 2가 모두 설정되어 있는 경우
-      if (P_category2) {
-        returnData = P_allData.filter((item) => {
-          return (
-            item.category1 === P_category1 && item.category2 === P_category2
-          );
-        });
-      }
-      // 카테고리1만 설정되어 있는 경우
-      else {
         returnData = P_allData.filter((item) => {
           return item.category1 === P_category1;
         });
-      }
-    }
-
-    // 카테고리 2만 설정되어 있을 경우
-    else if (P_category2) {
-      returnData = P_allData.filter((item) => {
-        return item.category2 === P_category2;
-      });
     }
 
     console.log("returnData값 >> " + returnData);
@@ -113,32 +101,6 @@ const SelectFood = () => {
     setTimeout(() => {
       setShowDataList((prev) => !prev);
     }, 1000);
-  };
-
-  //////////////////// 카테고리2 클릭 시 카테고리 변경
-  const category2Click = (category2) => {
-    // 카테고리 업데이트
-    setCategory2(() => category2);
-    // 데이터 리스트 숨기기
-    setShowDataList(false);
-    // 프로그래스바 초기화
-    setProgress(0);
-    // 로딩 컴포넌트 보이기
-    setLoadingShow((prev) => !prev);
-    // 로딩 컴포넌트 숨기기(1초 후)
-    setTimeout(() => {
-      setLoadingShow((prev) => !prev);
-    }, 1000);
-    //  데이터 리스트 보여주기
-    setTimeout(() => {
-      setShowDataList((prev) => !prev);
-    }, 1000);
-  };
-
-  //////////////////// 카테고리 리셋
-  const categoryReset = () => {
-    setCategory1("");
-    setCategory2("");
   };
 
   ////////////////////////////////////////////////// 변수 About 스토리지
@@ -206,7 +168,7 @@ const SelectFood = () => {
         return (
           <FoodItem_Container>
             <FoodItem_CategoryText>
-              {category1}&emsp;/&emsp;{category2}
+              {category1}
             </FoodItem_CategoryText>
             <FoodItem_NoDataText>
               데이터가 없어용 😢
@@ -236,8 +198,8 @@ const SelectFood = () => {
   //////////////////// 카테고리 변경 시 데이터 재필터링
   useEffect(() => {
     //필터링
-    filterData(allData, category1, category2);
-  }, [category1, category2]);
+    filterData(allData, category1);
+  }, [category1]);
 
   //////////////////// 필터링 된 데이터 변경 시 이미지 불러오기
   useEffect(() => {
@@ -273,19 +235,19 @@ const SelectFood = () => {
                   <FlexBox>
                     <CategoryButton
                       src={westernfood}
-                      onClick={() => category2Click("양식")}
+                      onClick={() => category1Click("양식")}
                     >
                       양식
                     </CategoryButton>
                     <CategoryButton
                       src={schoolfood}
-                      onClick={() => category2Click("분식")}
+                      onClick={() => category1Click("분식")}
                     >
                       분식
                     </CategoryButton>
                     <CategoryButton
                       src={snack}
-                      onClick={() => category2Click("간식")}
+                      onClick={() => category1Click("간식")}
                     >
                       간식
                     </CategoryButton>

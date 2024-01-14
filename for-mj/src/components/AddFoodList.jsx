@@ -18,7 +18,6 @@ const AddFoodList = () => {
   //////////////////// DB에 업로드할 데이터
   const [formData, setFormData] = useState({
     category1: "",
-    category2: "",
     name: "",
     descript: "",
   });
@@ -41,7 +40,6 @@ const AddFoodList = () => {
       // 문서명은 랜덤이며 문서에 들어갈 데이터는 중괄호 내부 내용과 같다
       const docRef = await addDoc(collection(db, "FoodList"), {
         category1: formData.category1,
-        category2: formData.category2,
         name: formData.name,
         descript: formData.descript,
         src: storageUploadImg.name,
@@ -50,7 +48,6 @@ const AddFoodList = () => {
       // 인풋폼 비우기
       setFormData({
         category1: "",
-        category2: "",
         name: "",
         descript: "",
       });
@@ -102,16 +99,7 @@ const AddFoodList = () => {
               name="category1"
               value={formData.category1}
               onChange={handleChange}
-              placeholder="ex) 한식, 중식, 일식, 양식"
-            />
-            <AddFoodList_Input
-              id="standard-basic"
-              label="카테고리2"
-              variant="standard"
-              name="category2"
-              value={formData.category2}
-              onChange={handleChange}
-              placeholder="ex) 국물, 볶음, 튀김"
+              placeholder="ex) 한식, 중식, 일식, 양식, 분식, 간식"
             />
             <AddFoodList_Input
               id="standard-basic"
