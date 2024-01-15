@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import DiaryItem from "../components/DiaryItem";
 import { db } from "../firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import AddDiary from "../components/AddDiary";
 import { useEffect } from "react";
 import { FoodItem_CategoryText, FoodItem_Container, FoodItem_NoDataText } from "../styles/style";
@@ -28,7 +28,9 @@ const Diary = () => {
   const readData = useCallback(async () => {
     try {
       const newData = [];
-      const querySnapshot = await getDocs(DiaryRef); // 컬렉션 참조 연결
+      const q = query(DiaryRef, orderBy("timestamp", "desc"));
+      
+      const querySnapshot = await getDocs(q); // 컬렉션 참조 연결
       // 컬렉션에 있는 데이터들을 모두 newData로 옮겨 담는다.
       querySnapshot.forEach((doc) => {
         newData.push(doc.data());
@@ -100,12 +102,9 @@ const Diary = () => {
     <>
       <Container_Diary>
         <MainWrap_Diary>
-          <Title_Diary>일___기</Title_Diary>
+          <Title_Diary>일기</Title_Diary>
           {/* 네비게이트 props */}
-          {location.state}
           <ItemWrap_Diary>
-            {/* {data.map((ItemNum, index) => 
-      (<DiaryItem key={index} number={ItemNum}/>))} */}
             {renderFilteredItem()}
           </ItemWrap_Diary>
           <AddDiary diaryName={location.state} />

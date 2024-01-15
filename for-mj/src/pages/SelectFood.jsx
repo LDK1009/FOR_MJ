@@ -14,7 +14,6 @@ import {
   SelectFood_Container,
   SelectFood_JustifyCenter,
   SelectFood_Wrap,
-  SelectPlayGround_CategoryContainer,
 } from "../styles/style";
 import koreafood from "../assets/images/food/한식.png";
 import japanfood from "../assets/images/food/일식.png";
