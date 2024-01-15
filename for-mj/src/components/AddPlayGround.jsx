@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import {
   FlexBox,
@@ -37,7 +36,6 @@ const AddPlayGround = () => {
   // db에 추가할 폼 데이터
   const [formData, setFormData] = useState({
     weather: "",
-    category: "",
     name: "",
     location: "",
     hash: "",
@@ -51,7 +49,6 @@ const AddPlayGround = () => {
       // 문서명은 랜덤이며 문서에 들어갈 데이터는 중괄호 내부 내용과 같다
       const docRef = await addDoc(collection(db, "PlayGroundList"), {
         weather: formData.weather,
-        category: formData.category,
         name: formData.name,
         location: formData.location,
         hash: formData.hash,
@@ -60,7 +57,6 @@ const AddPlayGround = () => {
       });
       setFormData({
         weather: "",
-        category: "",
         name: "",
         location: "",
         hash: "",
@@ -91,15 +87,6 @@ const AddPlayGround = () => {
               value={formData.weather}
               onChange={handleChange}
               placeholder="ex) 맑음, 구름, 비, 눈"
-            />
-            <AddFoodList_Input
-              id="standard-basic"
-              label="카테고리"
-              variant="standard"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              placeholder="ex) 액티비티, 힐링, 여행, 문화"
             />
             <AddFoodList_Input
               id="standard-basic"
